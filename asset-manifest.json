@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/keio-golf-team/static/css/main.d30413e1.css",
+    "main.js": "/keio-golf-team/static/js/main.6d325cfa.js",
+    "static/js/453.26637510.chunk.js": "/keio-golf-team/static/js/453.26637510.chunk.js",
+    "static/media/hero-image.jpg": "/keio-golf-team/static/media/hero-image.f5b80a3cf54131ce81da.jpg",
+    "index.html": "/keio-golf-team/index.html",
+    "main.d30413e1.css.map": "/keio-golf-team/static/css/main.d30413e1.css.map",
+    "main.6d325cfa.js.map": "/keio-golf-team/static/js/main.6d325cfa.js.map",
+    "453.26637510.chunk.js.map": "/keio-golf-team/static/js/453.26637510.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d30413e1.css",
+    "static/js/main.6d325cfa.js"
+  ]
+}
