@@ -1,25 +1,28 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Keio Golf",
+  "name": "慶應義塾大学ゴルフ部 | Keio Golf Club",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "/favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "/logo192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "/logo512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#003366",
+  "background_color": "#ffffff",
+  "lang": "ja",
+  "description": "慶應義塾大学ゴルフ部の公式サイト。大会結果、チーム紹介、活動情報を掲載しています。"
 }
