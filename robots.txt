@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.keiogolf.com/sitemap.xml
+# どちらを正規URLとするか明示
+Host: keiogolf.com
+
+# サイトマップURLも正規ドメインに統一
+Sitemap: https://keiogolf.com/sitemap.xml
