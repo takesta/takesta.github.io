@@ -2,7 +2,10 @@
   const CONTENT_URL = "/content/site-content.json";
   const ROUTES = {
     "/about": renderAbout,
-    "/schedule-results": renderScheduleResults
+    "/schedule-results": renderScheduleResults,
+    "/team": renderGenericPage("team"),
+    "/prospective": renderGenericPage("prospective"),
+    "/contact": renderGenericPage("contact")
   };
 
   const root = document.getElementById("root");
@@ -136,6 +139,44 @@
     }
 
     root.appendChild(container);
+  }
+
+  function renderGenericPage(key) {
+    return (content) => {
+      const page = content.pages?.[key];
+      if (!page) {
+        return;
+      }
+
+      clearRoot();
+
+      const container = createElement("section", null, "content-section");
+      container.appendChild(createElement("h1", page.title));
+
+      if (page.lead) {
+        container.appendChild(createElement("p", page.lead));
+      }
+
+      if (Array.isArray(page.sections)) {
+        page.sections.forEach((section) => {
+          if (section.heading) {
+            container.appendChild(createElement("h2", section.heading));
+          }
+          if (section.body) {
+            container.appendChild(createElement("p", section.body));
+          }
+          if (Array.isArray(section.list)) {
+            const list = createElement("ul", null, "content-list");
+            section.list.forEach((item) => {
+              list.appendChild(createElement("li", item));
+            });
+            container.appendChild(list);
+          }
+        });
+      }
+
+      root.appendChild(container);
+    };
   }
 
   const renderForRoute = async () => {
