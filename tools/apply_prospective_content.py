@@ -12,11 +12,13 @@ from pathlib import Path
 
 
 def extract_text(jsx_text: str) -> tuple[str, str]:
-    h2 = re.search(r"<h2>(.*?)</h2>", jsx_text, re.DOTALL)
-    p = re.search(r"<p>(.*?)</p>", jsx_text, re.DOTALL)
-    if not h2 or not p:
-        raise SystemExit("Could not find <h2> and <p> in Prospective.js")
-    return h2.group(1).strip(), p.group(1).strip()
+    h2_matches = re.findall(r"<h2>(.*?)</h2>", jsx_text, re.DOTALL)
+    p_matches = re.findall(r"<p>(.*?)</p>", jsx_text, re.DOTALL)
+    if len(h2_matches) != 1 or len(p_matches) != 1:
+        raise SystemExit(
+            "Prospective.js must contain exactly one <h2> and one <p> for this sync tool"
+        )
+    return h2_matches[0].strip(), p_matches[0].strip()
 
 
 def to_bundle_string(value: str) -> str:
