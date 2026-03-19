@@ -20,13 +20,14 @@ function Prospective() {
 
       <p>
         説明会への参加を希望される方は、LINE公式アカウント「{line.accountName}」（LINE ID：{line.id}）を
-        追加のうえ、{line.deadline}までに以下の項目をご送信ください。<br />
-        {requiredFields.map((field, index) => (
-          <React.Fragment key={field}>
-            ・{field}
-            {index < requiredFields.length - 1 && <br />}
-          </React.Fragment>
+        追加のうえ、{line.deadline}までに以下の項目をご送信ください。
+      </p>
+      <ul>
+        {requiredFields.map((field) => (
+          <li key={field}>{field}</li>
         ))}
+      </ul>
+      <p>
       </p>
 
       <p>
