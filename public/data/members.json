@@ -1,12 +1,12 @@
 {
   "captains": {
     "menCaptain": "伊藤優希",
-    "menManager": "相山武仁testtest",
+    "menManager": "相山武仁",
     "womenCaptain": "林真衣",
     "womenManager": "塩田瞳子"
   },
   "members": [
-    { "name": "相山 武仁test", "year": "3年", "gender": "male" },
+    { "name": "相山 武仁", "year": "3年", "gender": "male" },
     { "name": "伊藤 優希", "year": "3年", "gender": "male" },
     { "name": "飼沼 慎一朗", "year": "3年", "gender": "male" },
     { "name": "境 亮輔", "year": "3年", "gender": "male" },
