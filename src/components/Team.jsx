@@ -1,9 +1,7 @@
-import React from 'react'
-
 // 部員情報を直接編集できます
 const captains = {
   menCaptain: '伊藤優希',
-  menManager: '相山武仁test',
+  menManager: '相山武仁',
   womenCaptain: '林真衣',
   womenManager: '塩田瞳子',
 }
@@ -40,8 +38,8 @@ function Team() {
             </>
           )}
           <div className="members-grid">
-            {members[year].men.map((name, i) => (
-              <div key={i} className="team-member-card">
+            {members[year].men.map((name) => (
+              <div key={name} className="team-member-card">
                 <p>{name}</p>
               </div>
             ))}
@@ -55,8 +53,8 @@ function Team() {
             </>
           )}
           <div className="members-grid">
-            {members[year].women.map((name, i) => (
-              <div key={i} className="team-member-card">
+            {members[year].women.map((name) => (
+              <div key={name} className="team-member-card">
                 <p>{name}</p>
               </div>
             ))}
