@@ -1,8 +1,17 @@
-import React from 'react';
-import { prospectiveData } from './data/prospectiveData';
+import React, { useState, useEffect } from 'react'
 
 function Prospective() {
-  const { year, orientationSession, line, requiredFields, timeline } = prospectiveData;
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    fetch('/data/prospective.json')
+      .then(r => r.json())
+      .then(setData)
+  }, [])
+
+  if (!data) return null
+
+  const { year, orientationSession, line, requiredFields, timeline } = data
 
   return (
     <div className="container">
@@ -23,12 +32,10 @@ function Prospective() {
         追加のうえ、{line.deadline}までに以下の項目をご送信ください。
       </p>
       <ul>
-        {requiredFields.map((field) => (
+        {requiredFields.map(field => (
           <li key={field}>{field}</li>
         ))}
       </ul>
-      <p>
-      </p>
 
       <p>
         なお、入部を希望される方は入部説明会への参加が必須となります。
@@ -38,7 +45,7 @@ function Prospective() {
       <p>※説明会のZoom URLは、LINE公式アカウントを通じてご案内いたします。</p>
 
       <h3>入部までの流れ</h3>
-      {timeline.map((step) => (
+      {timeline.map(step => (
         <p key={step.label}>
           <strong>{step.label}</strong><br />
           {step.date}
@@ -51,7 +58,7 @@ function Prospective() {
         ご不明点やご質問等がございましたら、LINE公式アカウントまたはInstagramのDMよりお気軽にお問い合わせください。
       </p>
     </div>
-  );
+  )
 }
 
-export default Prospective;
+export default Prospective
