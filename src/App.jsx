@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import Home from './components/Home'
 import Team from './components/Team'
@@ -8,16 +8,6 @@ import Prospective from './components/Prospective'
 import Contact from './components/Contact'
 
 function App() {
-  const [content, setContent] = useState(null)
-
-  useEffect(() => {
-    fetch('/data/content.json')
-      .then(r => r.json())
-      .then(setContent)
-  }, [])
-
-  const footerText = content?.footer?.copyright ?? '© 2025 慶應義塾體育會ゴルフ部'
-
   return (
     <Router>
       <div className="App">
@@ -50,7 +40,7 @@ function App() {
 
         <footer>
           <div className="container">
-            <p>{footerText}</p>
+            <p>© 2026 慶應義塾體育會ゴルフ部</p>
           </div>
         </footer>
       </div>

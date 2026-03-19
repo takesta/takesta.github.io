@@ -1,27 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 function ContactSection() {
-  const [content, setContent] = useState(null)
-
-  useEffect(() => {
-    fetch('/data/content.json')
-      .then(r => r.json())
-      .then(setContent)
-  }, [])
-
-  const contact = content?.contact
-
   return (
     <section id="contact">
       <h2>お問い合わせ</h2>
-      <p>{contact?.description ?? 'ご質問やご入部に関するお問い合わせは、InstagramのDMまでご連絡ください。'}</p>
-      {contact?.socialLinks?.map(link => (
-        <p key={link.label}>
-          <a href={link.url} target="_blank" rel="noopener noreferrer">
-            {link.label}: {link.handle}
-          </a>
-        </p>
-      ))}
+      <p>ご質問やご入部に関するお問い合わせは、InstagramのDMまでご連絡ください。</p>
+      <p>
+        <a href="https://www.instagram.com/keio_golf_1922" target="_blank" rel="noopener noreferrer">
+          Instagram: @keio_golf_1922
+        </a>
+      </p>
+      <p>
+        <a href="https://x.com/KeioMensGolf" target="_blank" rel="noopener noreferrer">
+          X（旧Twitter）: @KeioMensGolf
+        </a>
+      </p>
+      <p>
+        <a href="https://www.facebook.com/keiogolfteam2013" target="_blank" rel="noopener noreferrer">
+          Facebook: keiogolfteam2013
+        </a>
+      </p>
     </section>
   )
 }
