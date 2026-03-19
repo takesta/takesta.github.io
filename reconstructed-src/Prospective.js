@@ -1,46 +1,54 @@
 import React from 'react';
+import { prospectiveData } from './data/prospectiveData';
 
 function Prospective() {
+  const { year, orientationSession, line, requiredFields, timeline } = prospectiveData;
+
   return (
-    <div className="container"> 
-      <h2>2026年度 新歓のお知らせ</h2>
-      <p>慶應義塾體育會ゴルフ部では、2026年度の新入部員を募集しております。
-ゴルフ経験者はもちろん、大学からゴルフを始めたい方のご参加も歓迎いたします。
+    <div className="container">
+      <h2>{year}年度 新歓のお知らせ</h2>
 
-2026年4月4日土曜日18:00から19:00にかけて、オンラインにて入部説明会を開催いたします。
+      <p>
+        慶應義塾體育會ゴルフ部では、{year}年度の新入部員を募集しております。
+        ゴルフ経験者はもちろん、大学からゴルフを始めたい方のご参加も歓迎いたします。
+      </p>
 
-説明会への参加を希望される方は、LINE公式アカウント「慶應義塾體育會ゴルフ部男子」（LINE ID：@882fmofb）を追加のうえ、4月3日金曜日までに以下の項目をご送信ください。
-・学部
-・学年
-・氏名
-・出身高校
-・ゴルフ歴
-・ベストスコア
-・説明会への参加可否
+      <p>
+        {orientationSession.date}{orientationSession.startTime}から{orientationSession.endTime}にかけて、
+        {orientationSession.format}にて入部説明会を開催いたします。
+      </p>
 
-なお、入部を希望される方は入部説明会への参加が必須となります。
-やむを得ず説明会に参加できない場合は、別日程での対応を検討いたしますので、その旨を必ずご連絡ください。
+      <p>
+        説明会への参加を希望される方は、LINE公式アカウント「{line.accountName}」（LINE ID：{line.id}）を
+        追加のうえ、{line.deadline}までに以下の項目をご送信ください。<br />
+        {requiredFields.map((field, index) => (
+          <React.Fragment key={field}>
+            ・{field}
+            {index < requiredFields.length - 1 && <br />}
+          </React.Fragment>
+        ))}
+      </p>
 
-※説明会のZoom URLは、LINE公式アカウントを通じてご案内いたします。
+      <p>
+        なお、入部を希望される方は入部説明会への参加が必須となります。
+        やむを得ず説明会に参加できない場合は、別日程での対応を検討いたしますので、その旨を必ずご連絡ください。
+      </p>
 
-入部までの流れ
+      <p>※説明会のZoom URLは、LINE公式アカウントを通じてご案内いたします。</p>
 
-LINE公式アカウントへの情報送信期限
-2026年4月3日金曜日
+      <h3>入部までの流れ</h3>
+      {timeline.map((step) => (
+        <p key={step.label}>
+          <strong>{step.label}</strong><br />
+          {step.date}
+          {step.time && <><br />{step.time}</>}
+          {step.note && <><br />※{step.note}</>}
+        </p>
+      ))}
 
-入部説明会（オンライン）
-2026年4月4日土曜日
-18:00〜19:00
-
-新入生トレーニング
-2026年4月6日月曜日〜4月22日水曜日
-6:00〜9:00
-※期間中に面談を実施いたします。
-
-入部
-2026年4月25日土曜日
-
-ご不明点やご質問等がございましたら、LINE公式アカウントまたはInstagramのDMよりお気軽にお問い合わせください。</p>
+      <p>
+        ご不明点やご質問等がございましたら、LINE公式アカウントまたはInstagramのDMよりお気軽にお問い合わせください。
+      </p>
     </div>
   );
 }
