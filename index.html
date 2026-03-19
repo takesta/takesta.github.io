@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="https://keiogolf.com/assets/icons/logo512.png" />
 
   <link rel="manifest" href="/manifest.json" />
-  <title>慶應義塾體育會ゴルフ部 公式サイト </title>
+  <title>慶應義塾體育會ゴルフ部 公式サイト</title>
 
   <!-- 構造化データ（JSON-LD） -->
   <script type="application/ld+json">
@@ -58,22 +58,52 @@
   }
   </script>
 
-  <!-- メインスクリプトとスタイル -->
-  <script defer="defer" src="/static/js/main.7c07dc9d.js"></script>
-  <script defer="defer" src="/assets/js/content-loader.js"></script>
   <link href="/static/css/main.cdf76346.css" rel="stylesheet">
+  <style>
+    /* ロゴリンクのスタイル調整 */
+    .logo h1 a { color: inherit; text-decoration: none; }
+  </style>
 </head>
 
 <body>
   <noscript>このサイトを閲覧するにはJavaScriptを有効にしてください。</noscript>
 
-  <div id="root">
-    <h1>慶應義塾體育會ゴルフ部 公式サイト</h1>
-    <p>慶應義塾體育會ゴルフ部は、1922年に創部された慶應義塾大学の学生ゴルフチームです。理念、沿革、部員紹介、試合日程・結果、入部案内、お問い合わせなどを掲載しています。</p>
+  <div class="App">
+    <header class="App-header">
+      <div class="container">
+        <div class="logo">
+          <h1><a href="/" data-nav>慶應義塾體育會ゴルフ部</a></h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="/" data-nav>ホーム</a></li>
+            <li><a href="/about" data-nav>部について</a></li>
+            <li><a href="/team" data-nav>部員紹介</a></li>
+            <li><a href="/schedule-results" data-nav>試合日程・結果</a></li>
+            <li><a href="/prospective" data-nav>入部希望の方へ</a></li>
+            <li><a href="/contact" data-nav>お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div id="root">
+      <!-- JavaScript が無効な環境向けフォールバック（SEO兼用） -->
+      <h1>慶應義塾體育會ゴルフ部 公式サイト</h1>
+      <p>慶應義塾體育會ゴルフ部は、1922年に創部された慶應義塾大学の学生ゴルフチームです。理念、沿革、部員紹介、試合日程・結果、入部案内、お問い合わせなどを掲載しています。</p>
+    </div>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 慶應義塾體育會ゴルフ部</p>
+      </div>
+    </footer>
   </div>
 
   <div class="member-search-index" aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
     相山武仁 伊藤優希 飼沼慎一朗 境亮輔 芹沢眞仁 千倉大地 二飯田貴大 平沼光太郎 増田壮一郎 三上慶 横井太郎 阿部英彦 上本航輝 生松将吾 片岡謙 鈴木拓磨 田中康晴 中野天真 野仲勇羽 山下諒 横井脩人 奥山大地 小泉健人 小林永征 崔新知 西丸雄之助 菅原勇次郎 立石大貴 田中風雅 沼尻寧央 長谷川拓 宮崎颯 吉田圭吾 岩村莉沙 塩田瞳子 富田己子 中井美奈子 濱谷美欧 林真衣 藤川真悠 三原瑞貴 石井里佳 木下真衣 田島七美 土志田理佐 柳原結夏 山本緋奈 弓長里紗恵 陸世妃 石原理緒 重田真結子 佐々木菜帆 舘山杏奈 中田織乃 林杏奈 古澤日菜子 三橋亜海 森川椰子
   </div>
+
+  <script src="/assets/js/app.js"></script>
 </body>
 </html>
