@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { members } from './members';
 import './Team.css';
 
 function Team() {
-  const membersByYear = members.reduce((acc, member) => {
+  const membersByYear = useMemo(() => members.reduce((acc, member) => {
     const { year } = member;
     if (!acc[year]) {
       acc[year] = { men: [], women: [] };
@@ -14,9 +14,12 @@ function Team() {
       acc[year].women.push(member);
     }
     return acc;
-  }, {});
+  }, {}), []);
 
-  const years = Object.keys(membersByYear).sort((a, b) => parseInt(b) - parseInt(a));
+  const years = useMemo(
+    () => Object.keys(membersByYear).sort((a, b) => parseInt(b) - parseInt(a)),
+    [membersByYear]
+  );
 
   return (
     <section id="team" className="container">
