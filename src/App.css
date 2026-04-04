@@ -137,18 +137,6 @@ h2 {
   text-align: center;
 }
 
-.schedule-item {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 20px;
-}
-
-.schedule-item h3 {
-  color: #003366;
-  margin-top: 0;
-}
-
 footer {
   background-color: #003366;
   color: #fff;
