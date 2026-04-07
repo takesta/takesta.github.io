@@ -1,5 +1,3 @@
-import React from 'react'
-
 function ScheduleResults() {
   return (
     <div className="container">

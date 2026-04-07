@@ -1,5 +1,3 @@
-import React from 'react'
-
 // 部員情報を直接編集できます
 const captains = {
   menCaptain: '伊藤優希',
