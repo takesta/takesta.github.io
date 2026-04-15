@@ -30,6 +30,12 @@ function b64Encode(str) {
   return btoa(Array.from(bytes, b => String.fromCharCode(b)).join(''))
 }
 
+function swap(arr, i, j) {
+  const copy = [...arr]
+  ;[copy[i], copy[j]] = [copy[j], copy[i]]
+  return copy
+}
+
 const CAPTAIN_LABELS = [
   ['男子主将', 'menCaptain'],
   ['男子主務', 'menManager'],
@@ -41,10 +47,31 @@ const inputStyle = { width: '100%', padding: '0.3rem 0.5rem', boxSizing: 'border
 const textareaStyle = { ...inputStyle, resize: 'vertical', minHeight: 80 }
 const btnPrimary = { padding: '0.5rem 1.5rem', background: '#004080', color: '#fff', border: 'none', cursor: 'pointer', borderRadius: 3, fontFamily: 'inherit', fontSize: '0.95rem' }
 const btnSecondary = { padding: '0.4rem 0.9rem', background: '#eee', color: '#333', border: '1px solid #ccc', cursor: 'pointer', borderRadius: 3, fontFamily: 'inherit', fontSize: '0.9rem' }
-const btnDanger = { background: 'none', border: 'none', cursor: 'pointer', color: '#c00', fontSize: '1.1rem', lineHeight: 1, padding: '0 0.25rem' }
+const btnDanger = { background: 'none', border: 'none', cursor: 'pointer', color: '#c00', fontSize: '1.1rem', lineHeight: 1, padding: '0 0.2rem' }
+const btnMove = { background: 'none', border: 'none', cursor: 'pointer', color: '#666', fontSize: '0.85rem', lineHeight: 1, padding: '0 0.15rem' }
+const btnMoveDisabled = { ...btnMove, color: '#ccc', cursor: 'default' }
 const sectionStyle = { marginBottom: '2rem' }
 const labelStyle = { display: 'block', fontSize: '0.85rem', color: '#555', marginBottom: '0.2rem' }
 const fieldRowStyle = { marginBottom: '0.75rem' }
+
+function MoveButtons({ index, total, onMove }) {
+  return (
+    <span style={{ display: 'inline-flex', flexDirection: 'column', verticalAlign: 'middle' }}>
+      <button
+        onClick={() => onMove(index, -1)}
+        disabled={index === 0}
+        style={index === 0 ? btnMoveDisabled : btnMove}
+        title="上へ"
+      >▲</button>
+      <button
+        onClick={() => onMove(index, 1)}
+        disabled={index === total - 1}
+        style={index === total - 1 ? btnMoveDisabled : btnMove}
+        title="下へ"
+      >▼</button>
+    </span>
+  )
+}
 
 function SectionHeading({ children }) {
   return <h3 style={{ borderBottom: '2px solid #004080', paddingBottom: '0.3rem', marginBottom: '1rem', color: '#004080' }}>{children}</h3>
@@ -126,6 +153,9 @@ function Admin() {
       return { ...d, members }
     })
 
+  const moveMember = (i, dir) =>
+    setMembersData(d => ({ ...d, members: swap(d.members, i, i + dir) }))
+
   const addMember = () =>
     setMembersData(d => ({ ...d, members: [...d.members, { name: '', year: '1年', gender: 'male' }] }))
 
@@ -143,6 +173,13 @@ function Admin() {
       })
     )
 
+  const moveEvent = (mi, ei, dir) =>
+    setScheduleData(d =>
+      d.map((m, mIdx) =>
+        mIdx === mi ? { ...m, events: swap(m.events, ei, ei + dir) } : m
+      )
+    )
+
   const addEvent = mi =>
     setScheduleData(d =>
       d.map((m, mIdx) => mIdx === mi ? { ...m, events: [...m.events, ''] } : m)
@@ -156,8 +193,6 @@ function Admin() {
     )
 
   // ── Prospective helpers ──────────────────────────────────────────
-  const updateProspective = (updater) => setProspectiveData(d => updater(d))
-
   const setProspField = (key, val) =>
     setProspectiveData(d => ({ ...d, [key]: val }))
 
@@ -174,6 +209,9 @@ function Admin() {
       return { ...d, requiredFields: arr }
     })
 
+  const moveRequiredField = (i, dir) =>
+    setProspectiveData(d => ({ ...d, requiredFields: swap(d.requiredFields, i, i + dir) }))
+
   const addRequiredField = () =>
     setProspectiveData(d => ({ ...d, requiredFields: [...d.requiredFields, ''] }))
 
@@ -186,6 +224,9 @@ function Admin() {
       timeline[i] = { ...timeline[i], [field]: val }
       return { ...d, timeline }
     })
+
+  const moveTimelineItem = (i, dir) =>
+    setProspectiveData(d => ({ ...d, timeline: swap(d.timeline, i, i + dir) }))
 
   const addTimelineItem = () =>
     setProspectiveData(d => ({ ...d, timeline: [...d.timeline, { label: '', date: '' }] }))
@@ -209,6 +250,12 @@ function Admin() {
       socialLinks[i] = { ...socialLinks[i], [field]: val }
       return { ...d, contact: { ...d.contact, socialLinks } }
     })
+
+  const moveSocialLink = (i, dir) =>
+    setContentData(d => ({
+      ...d,
+      contact: { ...d.contact, socialLinks: swap(d.contact.socialLinks, i, i + dir) },
+    }))
 
   const addSocialLink = () =>
     setContentData(d => ({
@@ -293,6 +340,7 @@ function Admin() {
           <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '1rem', fontSize: '0.95rem' }}>
             <thead>
               <tr style={{ background: '#f5f5f5', borderBottom: '2px solid #ddd' }}>
+                <th style={{ padding: '0.5rem', width: 32 }}></th>
                 <th style={{ padding: '0.5rem', textAlign: 'left' }}>氏名</th>
                 <th style={{ padding: '0.5rem', textAlign: 'left', width: 90 }}>学年</th>
                 <th style={{ padding: '0.5rem', textAlign: 'left', width: 80 }}>性別</th>
@@ -302,6 +350,9 @@ function Admin() {
             <tbody>
               {membersData.members.map((m, i) => (
                 <tr key={i} style={{ borderBottom: '1px solid #eee' }}>
+                  <td style={{ padding: '0.2rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                    <MoveButtons index={i} total={membersData.members.length} onMove={moveMember} />
+                  </td>
                   <td style={{ padding: '0.3rem 0.5rem 0.3rem 0' }}>
                     <input value={m.name} onChange={e => updateMember(i, 'name', e.target.value)} style={inputStyle} />
                   </td>
@@ -339,7 +390,8 @@ function Admin() {
               <div style={{ width: 52, paddingTop: '0.4rem', fontWeight: 'bold', flexShrink: 0 }}>{m.month}</div>
               <div style={{ flex: 1 }}>
                 {m.events.map((ev, ei) => (
-                  <div key={ei} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.35rem', alignItems: 'center' }}>
+                  <div key={ei} style={{ display: 'flex', gap: '0.4rem', marginBottom: '0.35rem', alignItems: 'center' }}>
+                    <MoveButtons index={ei} total={m.events.length} onMove={(i, dir) => moveEvent(mi, i, dir)} />
                     <input value={ev} onChange={e => updateEvent(mi, ei, e.target.value)} style={{ ...inputStyle, flex: 1 }} />
                     <button onClick={() => removeEvent(mi, ei)} style={btnDanger} title="削除">✕</button>
                   </div>
@@ -395,7 +447,8 @@ function Admin() {
           <SectionHeading>必須記入項目</SectionHeading>
           <div style={sectionStyle}>
             {prospectiveData.requiredFields.map((f, i) => (
-              <div key={i} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.35rem', alignItems: 'center' }}>
+              <div key={i} style={{ display: 'flex', gap: '0.4rem', marginBottom: '0.35rem', alignItems: 'center' }}>
+                <MoveButtons index={i} total={prospectiveData.requiredFields.length} onMove={moveRequiredField} />
                 <input value={f} onChange={e => updateRequiredField(i, e.target.value)} style={{ ...inputStyle, flex: 1 }} />
                 <button onClick={() => removeRequiredField(i)} style={btnDanger} title="削除">✕</button>
               </div>
@@ -407,9 +460,12 @@ function Admin() {
           <div style={sectionStyle}>
             {prospectiveData.timeline.map((item, i) => (
               <div key={i} style={{ border: '1px solid #ddd', borderRadius: 4, padding: '0.75rem', marginBottom: '0.75rem', background: '#fafafa', position: 'relative' }}>
-                <button onClick={() => removeTimelineItem(i)} style={{ ...btnDanger, position: 'absolute', top: '0.5rem', right: '0.5rem' }} title="削除">✕</button>
+                <div style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', display: 'flex', gap: '0.25rem', alignItems: 'center' }}>
+                  <MoveButtons index={i} total={prospectiveData.timeline.length} onMove={moveTimelineItem} />
+                  <button onClick={() => removeTimelineItem(i)} style={btnDanger} title="削除">✕</button>
+                </div>
                 {[['ラベル', 'label'], ['日付', 'date'], ['時間 (任意)', 'time'], ['備考 (任意)', 'note']].map(([lbl, key]) => (
-                  <div key={key} style={{ ...fieldRowStyle, paddingRight: '1.5rem' }}>
+                  <div key={key} style={{ ...fieldRowStyle, paddingRight: '3.5rem' }}>
                     <label style={labelStyle}>{lbl}</label>
                     <input
                       value={item[key] || ''}
@@ -464,9 +520,12 @@ function Admin() {
             <label style={{ ...labelStyle, marginBottom: '0.5rem' }}>SNSリンク</label>
             {contentData.contact.socialLinks.map((link, i) => (
               <div key={i} style={{ border: '1px solid #ddd', borderRadius: 4, padding: '0.75rem', marginBottom: '0.75rem', background: '#fafafa', position: 'relative' }}>
-                <button onClick={() => removeSocialLink(i)} style={{ ...btnDanger, position: 'absolute', top: '0.5rem', right: '0.5rem' }} title="削除">✕</button>
+                <div style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', display: 'flex', gap: '0.25rem', alignItems: 'center' }}>
+                  <MoveButtons index={i} total={contentData.contact.socialLinks.length} onMove={moveSocialLink} />
+                  <button onClick={() => removeSocialLink(i)} style={btnDanger} title="削除">✕</button>
+                </div>
                 {[['ラベル', 'label'], ['ハンドル名', 'handle'], ['URL', 'url']].map(([lbl, key]) => (
-                  <div key={key} style={{ ...fieldRowStyle, paddingRight: '1.5rem' }}>
+                  <div key={key} style={{ ...fieldRowStyle, paddingRight: '3.5rem' }}>
                     <label style={labelStyle}>{lbl}</label>
                     <input value={link[key]} onChange={e => updateSocialLink(i, key, e.target.value)} style={inputStyle} />
                   </div>
