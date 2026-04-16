@@ -12,7 +12,7 @@ function Team() {
   if (!data) return <section id="team" className="container"><p>読み込み中...</p></section>
 
   const { captains, members } = data
-  const years = ['3年', '2年', '1年']
+  const years = ['4年', '3年', '2年', '1年']
 
   return (
     <section id="team" className="container">
@@ -21,12 +21,13 @@ function Team() {
       {years.map(year => {
         const men = members.filter(m => m.year === year && m.gender === 'male')
         const women = members.filter(m => m.year === year && m.gender === 'female')
+        if (men.length === 0 && women.length === 0) return null
         return (
           <div key={year} className="year-section">
             <h3>{year}</h3>
 
             <h4>男子</h4>
-            {year === '3年' && (
+            {year === '4年' && (
               <>
                 <h4><span className="captain-manager">主将 {captains.menCaptain}</span></h4>
                 <h4><span className="captain-manager">主務 {captains.menManager}</span></h4>
@@ -39,7 +40,7 @@ function Team() {
             </div>
 
             <h4>女子</h4>
-            {year === '3年' && (
+            {year === '4年' && (
               <>
                 <h4><span className="captain-manager">主将 {captains.womenCaptain}</span></h4>
                 <h4><span className="captain-manager">主務 {captains.womenManager}</span></h4>
