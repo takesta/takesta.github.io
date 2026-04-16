@@ -37,18 +37,8 @@
       "gender": "male"
     },
     {
-      "name": "二飯田 貴大",
-      "year": "3年",
-      "gender": "male"
-    },
-    {
       "name": "平沼 光太郎",
       "year": "4年",
-      "gender": "male"
-    },
-    {
-      "name": "増田 壮一郎",
-      "year": "3年",
       "gender": "male"
     },
     {
@@ -59,116 +49,6 @@
     {
       "name": "横井 太郎",
       "year": "4年",
-      "gender": "male"
-    },
-    {
-      "name": "阿部 英彦",
-      "year": "3年",
-      "gender": "male"
-    },
-    {
-      "name": "上本 航輝",
-      "year": "3年",
-      "gender": "male"
-    },
-    {
-      "name": "生松 将吾",
-      "year": "3年",
-      "gender": "male"
-    },
-    {
-      "name": "片岡 謙",
-      "year": "3年",
-      "gender": "male"
-    },
-    {
-      "name": "鈴木 拓磨",
-      "year": "3年",
-      "gender": "male"
-    },
-    {
-      "name": "田中 康晴",
-      "year": "3年",
-      "gender": "male"
-    },
-    {
-      "name": "中野 天真",
-      "year": "3年",
-      "gender": "male"
-    },
-    {
-      "name": "野仲 勇羽",
-      "year": "3年",
-      "gender": "male"
-    },
-    {
-      "name": "山下 諒",
-      "year": "3年",
-      "gender": "male"
-    },
-    {
-      "name": "横井 脩人",
-      "year": "3年",
-      "gender": "male"
-    },
-    {
-      "name": "奥山 大地",
-      "year": "2年",
-      "gender": "male"
-    },
-    {
-      "name": "小泉 健人",
-      "year": "2年",
-      "gender": "male"
-    },
-    {
-      "name": "小林 永征",
-      "year": "2年",
-      "gender": "male"
-    },
-    {
-      "name": "崔 新知",
-      "year": "2年",
-      "gender": "male"
-    },
-    {
-      "name": "西丸 雄之助",
-      "year": "2年",
-      "gender": "male"
-    },
-    {
-      "name": "菅原 勇次郎",
-      "year": "2年",
-      "gender": "male"
-    },
-    {
-      "name": "立石 大貴",
-      "year": "2年",
-      "gender": "male"
-    },
-    {
-      "name": "田中 風雅",
-      "year": "2年",
-      "gender": "male"
-    },
-    {
-      "name": "沼尻 寧央",
-      "year": "2年",
-      "gender": "male"
-    },
-    {
-      "name": "長谷川 拓",
-      "year": "2年",
-      "gender": "male"
-    },
-    {
-      "name": "宮崎 颯",
-      "year": "2年",
-      "gender": "male"
-    },
-    {
-      "name": "吉田 圭吾",
-      "year": "2年",
       "gender": "male"
     },
     {
@@ -212,6 +92,66 @@
       "gender": "female"
     },
     {
+      "name": "阿部 英彦",
+      "year": "3年",
+      "gender": "male"
+    },
+    {
+      "name": "生松 将吾",
+      "year": "3年",
+      "gender": "male"
+    },
+    {
+      "name": "上本 航輝",
+      "year": "3年",
+      "gender": "male"
+    },
+    {
+      "name": "片岡 謙",
+      "year": "3年",
+      "gender": "male"
+    },
+    {
+      "name": "鈴木 拓磨",
+      "year": "3年",
+      "gender": "male"
+    },
+    {
+      "name": "田中 康晴",
+      "year": "3年",
+      "gender": "male"
+    },
+    {
+      "name": "中野 天真",
+      "year": "3年",
+      "gender": "male"
+    },
+    {
+      "name": "二飯田 貴大",
+      "year": "3年",
+      "gender": "male"
+    },
+    {
+      "name": "野仲 勇羽",
+      "year": "3年",
+      "gender": "male"
+    },
+    {
+      "name": "増田 壮一郎",
+      "year": "3年",
+      "gender": "male"
+    },
+    {
+      "name": "山下 諒",
+      "year": "3年",
+      "gender": "male"
+    },
+    {
+      "name": "横井 脩人",
+      "year": "3年",
+      "gender": "male"
+    },
+    {
       "name": "石井 里佳",
       "year": "3年",
       "gender": "female"
@@ -252,17 +192,77 @@
       "gender": "female"
     },
     {
+      "name": "奥山 大地",
+      "year": "2年",
+      "gender": "male"
+    },
+    {
+      "name": "小泉 健人",
+      "year": "2年",
+      "gender": "male"
+    },
+    {
+      "name": "小林 永征",
+      "year": "2年",
+      "gender": "male"
+    },
+    {
+      "name": "崔 新知",
+      "year": "2年",
+      "gender": "male"
+    },
+    {
+      "name": "菅原 勇次郎",
+      "year": "2年",
+      "gender": "male"
+    },
+    {
+      "name": "立石 大貴",
+      "year": "2年",
+      "gender": "male"
+    },
+    {
+      "name": "田中 風雅",
+      "year": "2年",
+      "gender": "male"
+    },
+    {
+      "name": "西丸 雄之助",
+      "year": "2年",
+      "gender": "male"
+    },
+    {
+      "name": "沼尻 寧央",
+      "year": "2年",
+      "gender": "male"
+    },
+    {
+      "name": "長谷川 拓",
+      "year": "2年",
+      "gender": "male"
+    },
+    {
+      "name": "宮崎 颯",
+      "year": "2年",
+      "gender": "male"
+    },
+    {
+      "name": "吉田 圭吾",
+      "year": "2年",
+      "gender": "male"
+    },
+    {
       "name": "石原 理緒",
       "year": "2年",
       "gender": "female"
     },
     {
-      "name": "重田 真結子",
+      "name": "佐々木 菜帆",
       "year": "2年",
       "gender": "female"
     },
     {
-      "name": "佐々木 菜帆",
+      "name": "重田 真結子",
       "year": "2年",
       "gender": "female"
     },
