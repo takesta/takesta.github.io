@@ -30,6 +30,7 @@ function Team() {
             {year === '4年' && (
               <>
                 <h4><span className="captain-manager">主将 {captains.menCaptain}</span></h4>
+                <h4><span className="captain-manager">副将 {captains.menViceCaptain}</span></h4>
                 <h4><span className="captain-manager">主務 {captains.menManager}</span></h4>
               </>
             )}
@@ -43,6 +44,7 @@ function Team() {
             {year === '4年' && (
               <>
                 <h4><span className="captain-manager">主将 {captains.womenCaptain}</span></h4>
+                <h4><span className="captain-manager">副将 {captains.womenViceCaptain}</span></h4>
                 <h4><span className="captain-manager">主務 {captains.womenManager}</span></h4>
               </>
             )}
