@@ -37,18 +37,8 @@
       "gender": "male"
     },
     {
-      "name": "二飯田 貴大",
-      "year": "3年",
-      "gender": "male"
-    },
-    {
       "name": "平沼 光太郎",
       "year": "4年",
-      "gender": "male"
-    },
-    {
-      "name": "増田 壮一郎",
-      "year": "3年",
       "gender": "male"
     },
     {
@@ -62,17 +52,57 @@
       "gender": "male"
     },
     {
+      "name": "岩村 莉沙",
+      "year": "4年",
+      "gender": "female"
+    },
+    {
+      "name": "塩田 瞳子",
+      "year": "4年",
+      "gender": "female"
+    },
+    {
+      "name": "富田 己子",
+      "year": "4年",
+      "gender": "female"
+    },
+    {
+      "name": "中井 美奈子",
+      "year": "4年",
+      "gender": "female"
+    },
+    {
+      "name": "濱谷 美欧",
+      "year": "4年",
+      "gender": "female"
+    },
+    {
+      "name": "林 真衣",
+      "year": "4年",
+      "gender": "female"
+    },
+    {
+      "name": "藤川 真悠",
+      "year": "4年",
+      "gender": "female"
+    },
+    {
+      "name": "三原 瑞貴",
+      "year": "4年",
+      "gender": "female"
+    },
+    {
       "name": "阿部 英彦",
       "year": "3年",
       "gender": "male"
     },
     {
-      "name": "上本 航輝",
+      "name": "生松 将吾",
       "year": "3年",
       "gender": "male"
     },
     {
-      "name": "生松 将吾",
+      "name": "上本 航輝",
       "year": "3年",
       "gender": "male"
     },
@@ -97,7 +127,17 @@
       "gender": "male"
     },
     {
+      "name": "二飯田 貴大",
+      "year": "3年",
+      "gender": "male"
+    },
+    {
       "name": "野仲 勇羽",
+      "year": "3年",
+      "gender": "male"
+    },
+    {
+      "name": "増田 壮一郎",
       "year": "3年",
       "gender": "male"
     },
@@ -110,6 +150,46 @@
       "name": "横井 脩人",
       "year": "3年",
       "gender": "male"
+    },
+    {
+      "name": "石井 里佳",
+      "year": "3年",
+      "gender": "female"
+    },
+    {
+      "name": "木下 真衣",
+      "year": "3年",
+      "gender": "female"
+    },
+    {
+      "name": "田島 七美",
+      "year": "3年",
+      "gender": "female"
+    },
+    {
+      "name": "土志田 理佐",
+      "year": "3年",
+      "gender": "female"
+    },
+    {
+      "name": "柳原 結夏",
+      "year": "3年",
+      "gender": "female"
+    },
+    {
+      "name": "山本 緋奈",
+      "year": "3年",
+      "gender": "female"
+    },
+    {
+      "name": "弓長 里紗恵",
+      "year": "3年",
+      "gender": "female"
+    },
+    {
+      "name": "陸 世妃",
+      "year": "3年",
+      "gender": "female"
     },
     {
       "name": "奥山 大地",
@@ -172,97 +252,17 @@
       "gender": "male"
     },
     {
-      "name": "岩村 莉沙",
-      "year": "4年",
-      "gender": "female"
-    },
-    {
-      "name": "塩田 瞳子",
-      "year": "4年",
-      "gender": "female"
-    },
-    {
-      "name": "富田 己子",
-      "year": "4年",
-      "gender": "female"
-    },
-    {
-      "name": "中井 美奈子",
-      "year": "4年",
-      "gender": "female"
-    },
-    {
-      "name": "濱谷 美欧",
-      "year": "4年",
-      "gender": "female"
-    },
-    {
-      "name": "林 真衣",
-      "year": "4年",
-      "gender": "female"
-    },
-    {
-      "name": "藤川 真悠",
-      "year": "4年",
-      "gender": "female"
-    },
-    {
-      "name": "三原 瑞貴",
-      "year": "4年",
-      "gender": "female"
-    },
-    {
-      "name": "石井 里佳",
-      "year": "3年",
-      "gender": "female"
-    },
-    {
-      "name": "木下 真衣",
-      "year": "3年",
-      "gender": "female"
-    },
-    {
-      "name": "田島 七美",
-      "year": "3年",
-      "gender": "female"
-    },
-    {
-      "name": "土志田 理佐",
-      "year": "3年",
-      "gender": "female"
-    },
-    {
-      "name": "柳原 結夏",
-      "year": "3年",
-      "gender": "female"
-    },
-    {
-      "name": "山本 緋奈",
-      "year": "3年",
-      "gender": "female"
-    },
-    {
-      "name": "弓長 里紗恵",
-      "year": "3年",
-      "gender": "female"
-    },
-    {
-      "name": "陸 世妃",
-      "year": "3年",
-      "gender": "female"
-    },
-    {
       "name": "石原 理緒",
       "year": "2年",
       "gender": "female"
     },
     {
-      "name": "重田 真結子",
+      "name": "佐々木 菜帆",
       "year": "2年",
       "gender": "female"
     },
     {
-      "name": "佐々木 菜帆",
+      "name": "重田 真結子",
       "year": "2年",
       "gender": "female"
     },
