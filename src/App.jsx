@@ -6,24 +6,26 @@ import About from './components/About'
 import ScheduleResults from './components/ScheduleResults'
 import Prospective from './components/Prospective'
 import Contact from './components/Contact'
+import content from '../content/content.json'
 
 function App() {
+  const { siteTitle, nav, footer } = content
   return (
     <Router>
       <div className="App">
         <header className="App-header">
           <div className="container">
             <div className="logo">
-              <h1><Link to="/">慶應義塾體育會ゴルフ部</Link></h1>
+              <h1><Link to="/">{siteTitle}</Link></h1>
             </div>
             <nav>
               <ul>
-                <li><Link to="/">ホーム</Link></li>
-                <li><Link to="/about">部について</Link></li>
-                <li><Link to="/team">部員紹介</Link></li>
-                <li><Link to="/schedule-results">試合日程・結果</Link></li>
-                <li><Link to="/prospective">入部希望の方へ</Link></li>
-                <li><Link to="/contact">お問い合わせ</Link></li>
+                <li><Link to="/">{nav.home}</Link></li>
+                <li><Link to="/about">{nav.about}</Link></li>
+                <li><Link to="/team">{nav.team}</Link></li>
+                <li><Link to="/schedule-results">{nav.schedule}</Link></li>
+                <li><Link to="/prospective">{nav.prospective}</Link></li>
+                <li><Link to="/contact">{nav.contact}</Link></li>
               </ul>
             </nav>
           </div>
@@ -40,7 +42,7 @@ function App() {
 
         <footer>
           <div className="container">
-            <p>© 2026 慶應義塾體育會ゴルフ部</p>
+            <p>{footer.copyright}</p>
           </div>
         </footer>
       </div>
