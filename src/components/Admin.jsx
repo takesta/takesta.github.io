@@ -51,7 +51,7 @@ function SectionHeading({ children }) {
 }
 
 function Admin() {
-  const [token, setToken] = useState(sessionStorage.getItem('gh_token') || '')
+  const [token, setToken] = useState('')
   const [connected, setConnected] = useState(false)
   const [tab, setTab] = useState('members')
   const [status, setStatus] = useState('')
@@ -85,7 +85,6 @@ function Admin() {
       setProspectiveSha(pRes.sha)
       setContentData(JSON.parse(b64Decode(cRes.content)))
       setContentSha(cRes.sha)
-      sessionStorage.setItem('gh_token', token)
       setConnected(true)
       setStatus('')
     } catch {

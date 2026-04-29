@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
+
+const YEARS = ['4年', '3年', '2年', '1年']
 
 function Team() {
   const [data, setData] = useState(null)
@@ -9,18 +11,27 @@ function Team() {
       .then(setData)
   }, [])
 
+  const grouped = useMemo(() => {
+    if (!data) return null
+    const map = {}
+    for (const year of YEARS) map[year] = { male: [], female: [] }
+    for (const m of data.members) {
+      const bucket = map[m.year]
+      if (bucket && bucket[m.gender]) bucket[m.gender].push(m)
+    }
+    return map
+  }, [data])
+
   if (!data) return <section id="team" className="container"><p>読み込み中...</p></section>
 
-  const { captains, members } = data
-  const years = ['4年', '3年', '2年', '1年']
+  const { captains } = data
 
   return (
     <section id="team" className="container">
       <h2>部員紹介</h2>
 
-      {years.map(year => {
-        const men = members.filter(m => m.year === year && m.gender === 'male')
-        const women = members.filter(m => m.year === year && m.gender === 'female')
+      {YEARS.map(year => {
+        const { male: men, female: women } = grouped[year]
         if (men.length === 0 && women.length === 0) return null
         return (
           <div key={year} className="year-section">

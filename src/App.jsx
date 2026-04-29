@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import Home from './components/Home'
 import Team from './components/Team'
@@ -6,7 +6,8 @@ import About from './components/About'
 import ScheduleResults from './components/ScheduleResults'
 import Prospective from './components/Prospective'
 import Contact from './components/Contact'
-import Admin from './components/Admin'
+
+const Admin = lazy(() => import('./components/Admin'))
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
           <Route path="/schedule-results" element={<ScheduleResults />} />
           <Route path="/prospective" element={<Prospective />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<Suspense fallback={null}><Admin /></Suspense>} />
         </Routes>
 
         <footer>
