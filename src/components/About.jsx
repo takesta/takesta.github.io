@@ -1,11 +1,13 @@
 import React from 'react'
+import content from '../../content/content.json'
 
 function About() {
+  const { about } = content
   return (
     <div className="container">
       <div id="philosophy">
-        <h2>理念</h2>
-        <p>我がゴルフ部が目指すのは、関東大学対抗戦Aブロックへの復活です。近年は他大学のレベルも上がってきており、推薦選手を採用していない我が部が勝つためにはどうすれば良いかを考え、チーム一丸となって努力しています。また、国内大学最初のゴルフ部として、実力のみならず、ゴルフ場でのルールやマナーを重んじ、他大学の模範となるよう心掛けています。先輩方が掲げた「学生ゴルフ界に旋風を巻き起こす」という理念のもと、目標を達成すべく、日々精進してまいります。</p>
+        <h2>{about.title}</h2>
+        <p>{about.philosophy}</p>
       </div>
     </div>
   )

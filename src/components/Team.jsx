@@ -1,34 +1,26 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
+import content from '../../content/content.json'
+import membersData from '../../content/members.json'
 
 const YEARS = ['4年', '3年', '2年', '1年']
 
 function Team() {
-  const [data, setData] = useState(null)
-
-  useEffect(() => {
-    fetch('/data/members.json')
-      .then(r => r.json())
-      .then(setData)
-  }, [])
+  const { team } = content
+  const { captains } = membersData
 
   const grouped = useMemo(() => {
-    if (!data) return null
     const map = {}
     for (const year of YEARS) map[year] = { male: [], female: [] }
-    for (const m of data.members) {
+    for (const m of membersData.members) {
       const bucket = map[m.year]
       if (bucket && bucket[m.gender]) bucket[m.gender].push(m)
     }
     return map
-  }, [data])
-
-  if (!data) return <section id="team" className="container"><p>読み込み中...</p></section>
-
-  const { captains } = data
+  }, [])
 
   return (
     <section id="team" className="container">
-      <h2>部員紹介</h2>
+      <h2>{team.title}</h2>
 
       {YEARS.map(year => {
         const { male: men, female: women } = grouped[year]
@@ -37,12 +29,12 @@ function Team() {
           <div key={year} className="year-section">
             <h3>{year}</h3>
 
-            <h4>男子</h4>
+            <h4>{team.menLabel}</h4>
             {year === '4年' && (
               <>
-                <h4><span className="captain-manager">主将 {captains.menCaptain}</span></h4>
-                <h4><span className="captain-manager">副将 {captains.menViceCaptain}</span></h4>
-                <h4><span className="captain-manager">主務 {captains.menManager}</span></h4>
+                <h4><span className="captain-manager">{team.captainLabel} {captains.menCaptain}</span></h4>
+                <h4><span className="captain-manager">{team.viceCaptainLabel} {captains.menViceCaptain}</span></h4>
+                <h4><span className="captain-manager">{team.managerLabel} {captains.menManager}</span></h4>
               </>
             )}
             <div className="members-grid">
@@ -51,12 +43,12 @@ function Team() {
               ))}
             </div>
 
-            <h4>女子</h4>
+            <h4>{team.womenLabel}</h4>
             {year === '4年' && (
               <>
-                <h4><span className="captain-manager">主将 {captains.womenCaptain}</span></h4>
-                <h4><span className="captain-manager">副将 {captains.womenViceCaptain}</span></h4>
-                <h4><span className="captain-manager">主務 {captains.womenManager}</span></h4>
+                <h4><span className="captain-manager">{team.captainLabel} {captains.womenCaptain}</span></h4>
+                <h4><span className="captain-manager">{team.viceCaptainLabel} {captains.womenViceCaptain}</span></h4>
+                <h4><span className="captain-manager">{team.managerLabel} {captains.womenManager}</span></h4>
               </>
             )}
             <div className="members-grid">

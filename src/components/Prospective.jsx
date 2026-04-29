@@ -1,65 +1,45 @@
 import React from 'react'
+import data from '../../content/prospective.json'
 
 function Prospective() {
+  const { orientationSession, line } = data
   return (
     <div className="container">
-      <h2>2026年度 新歓のお知らせ</h2>
+      <h2>{data.pageTitle}</h2>
+
+      <p>{data.intro}</p>
 
       <p>
-        慶應義塾體育會ゴルフ部では、2026年度の新入部員を募集しております。
-        ゴルフ経験者はもちろん、大学からゴルフを始めたい方のご参加も歓迎いたします。
+        {orientationSession.date}
+        {orientationSession.startTime}から{orientationSession.endTime}にかけて、
+        {orientationSession.format}にて入部説明会を開催いたします。
       </p>
 
       <p>
-        2026年4月4日土曜日18:00から19:00にかけて、
-        オンラインにて入部説明会を開催いたします。
-      </p>
-
-      <p>
-        説明会への参加を希望される方は、LINE公式アカウント「慶應義塾體育會ゴルフ部男子」（LINE ID：@882fmofb）を
-        追加のうえ、4月3日金曜日までに以下の項目をご送信ください。
+        説明会への参加を希望される方は、LINE公式アカウント「{line.accountName}」（LINE ID：{line.id}）を
+        追加のうえ、{line.deadline}までに以下の項目をご送信ください。
       </p>
       <ul>
-        <li>学部</li>
-        <li>学年</li>
-        <li>氏名</li>
-        <li>出身高校</li>
-        <li>ゴルフ歴</li>
-        <li>ベストスコア</li>
-        <li>説明会への参加可否</li>
+        {data.requiredFields.map(field => (
+          <li key={field}>{field}</li>
+        ))}
       </ul>
 
-      <p>
-        なお、入部を希望される方は入部説明会への参加が<strong>必須</strong>となります。
-        やむを得ず説明会に参加できない場合は、別日程での対応を検討いたしますので、その旨を必ずご連絡ください。
-      </p>
+      <p>{data.mandatoryNote}</p>
 
-      <p>※説明会のZoom URLは、LINE公式アカウントを通じてご案内いたします。</p>
+      <p>{data.formNote}</p>
 
-      <h3>入部までの流れ</h3>
-      <p>
-        <strong>LINE公式アカウントへの情報送信期限</strong><br />
-        2026年4月3日金曜日
-      </p>
-      <p>
-        <strong>入部説明会（オンライン）</strong><br />
-        2026年4月4日土曜日<br />
-        18:00〜19:00
-      </p>
-      <p>
-        <strong>新入生トレーニング</strong><br />
-        2026年4月6日月曜日〜4月22日水曜日<br />
-        6:00〜9:00<br />
-        ※期間中に面談を実施いたします。
-      </p>
-      <p>
-        <strong>入部</strong><br />
-        2026年4月25日土曜日
-      </p>
+      <h3>{data.timelineHeading}</h3>
+      {data.timeline.map((step, i) => (
+        <p key={i}>
+          <strong>{step.label}</strong><br />
+          {step.date}
+          {step.time && <><br />{step.time}</>}
+          {step.note && <><br />※{step.note}</>}
+        </p>
+      ))}
 
-      <p>
-        ご不明点やご質問等がございましたら、LINE公式アカウントまたはInstagramのDMよりお気軽にお問い合わせください。
-      </p>
+      <p>{data.closing}</p>
     </div>
   )
 }
