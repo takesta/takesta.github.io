@@ -6,7 +6,6 @@ import About from './components/About'
 import ScheduleResults from './components/ScheduleResults'
 import Prospective from './components/Prospective'
 import Contact from './components/Contact'
-import Admin from './components/Admin'
 
 function App() {
   return (
@@ -37,7 +36,6 @@ function App() {
           <Route path="/schedule-results" element={<ScheduleResults />} />
           <Route path="/prospective" element={<Prospective />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/admin" element={<Admin />} />
         </Routes>
 
         <footer>
