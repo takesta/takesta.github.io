@@ -39,6 +39,10 @@
             "type": "string",
             "description": "「male」または「female」。",
             "enum": ["male", "female"]
+          },
+          "photo": {
+            "type": "string",
+            "description": "顔写真のファイル名（例：yamada-taro.jpg）。public/assets/members/ フォルダに画像を置き、ファイル名だけを記入してください。省略可能。"
           }
         }
       }

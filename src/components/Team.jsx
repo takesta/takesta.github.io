@@ -4,9 +4,24 @@ import membersData from '../../content/members.json'
 
 const YEARS = ['4年', '3年', '2年', '1年']
 
+function normalize(name) {
+  return name.replace(/\s/g, '')
+}
+
 function Team() {
   const { team } = content
   const { captains } = membersData
+
+  const titleMap = useMemo(() => {
+    const map = {}
+    map[normalize(captains.menCaptain)] = team.captainLabel
+    map[normalize(captains.menViceCaptain)] = team.viceCaptainLabel
+    map[normalize(captains.menManager)] = team.managerLabel
+    map[normalize(captains.womenCaptain)] = team.captainLabel
+    map[normalize(captains.womenViceCaptain)] = team.viceCaptainLabel
+    map[normalize(captains.womenManager)] = team.managerLabel
+    return map
+  }, [captains, team])
 
   const grouped = useMemo(() => {
     const map = {}
@@ -17,6 +32,22 @@ function Team() {
     }
     return map
   }, [])
+
+  function MemberCard({ m }) {
+    const title = titleMap[normalize(m.name)]
+    return (
+      <div className="team-member-card">
+        <div className="member-photo-wrap">
+          {m.photo
+            ? <img src={`/assets/members/${m.photo}`} alt={m.name} className="member-photo" />
+            : <div className="member-photo-placeholder" />
+          }
+        </div>
+        {title && <span className="member-title-badge">{title}</span>}
+        <p className="member-name">{m.name}</p>
+      </div>
+    )
+  }
 
   return (
     <section id="team" className="container">
@@ -30,31 +61,13 @@ function Team() {
             <h3>{year}</h3>
 
             <h4>{team.menLabel}</h4>
-            {year === '4年' && (
-              <>
-                <h4><span className="captain-manager">{team.captainLabel} {captains.menCaptain}</span></h4>
-                <h4><span className="captain-manager">{team.viceCaptainLabel} {captains.menViceCaptain}</span></h4>
-                <h4><span className="captain-manager">{team.managerLabel} {captains.menManager}</span></h4>
-              </>
-            )}
             <div className="members-grid">
-              {men.map((m, i) => (
-                <div key={i} className="team-member-card"><p>{m.name}</p></div>
-              ))}
+              {men.map((m, i) => <MemberCard key={i} m={m} />)}
             </div>
 
             <h4>{team.womenLabel}</h4>
-            {year === '4年' && (
-              <>
-                <h4><span className="captain-manager">{team.captainLabel} {captains.womenCaptain}</span></h4>
-                <h4><span className="captain-manager">{team.viceCaptainLabel} {captains.womenViceCaptain}</span></h4>
-                <h4><span className="captain-manager">{team.managerLabel} {captains.womenManager}</span></h4>
-              </>
-            )}
             <div className="members-grid">
-              {women.map((m, i) => (
-                <div key={i} className="team-member-card"><p>{m.name}</p></div>
-              ))}
+              {women.map((m, i) => <MemberCard key={i} m={m} />)}
             </div>
           </div>
         )
