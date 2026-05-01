@@ -5,9 +5,9 @@
   --navy: #003366;
   --navy-dark: #002244;
   --navy-light: #1a4d8c;
-  --gold: #C9A84C;
-  --gold-light: #e0c070;
-  --gold-dark: #a07830;
+  --gold: #F1C400;
+  --gold-light: #F5D640;
+  --gold-dark: #C9A200;
   --white: #ffffff;
   --off-white: #f7f5f0;
   --gray-50: #fafafa;
@@ -911,7 +911,8 @@ footer {
   }
 
   .hero-text h2 {
-    font-size: 36px;
+    font-size: min(36px, 7.5vw);
+    white-space: nowrap;
   }
 
   .hero-text p {
