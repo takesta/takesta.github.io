@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect } from 'react'
 import content from '../../content/content.json'
 import membersData from '../../content/members.json'
 
@@ -11,6 +11,15 @@ function normalize(name) {
 function Team() {
   const { team } = content
   const { captains } = membersData
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
+      { threshold: 0.08 }
+    )
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   const titleMap = useMemo(() => {
     const map = {}
@@ -50,25 +59,39 @@ function Team() {
   }
 
   return (
-    <section id="team" className="container">
-      <h2>{team.title}</h2>
+    <section id="team" className="container page-content">
+      <div className="section-heading fade-up">
+        <h2>{team.title}</h2>
+        <div className="section-heading-divider"><span /></div>
+      </div>
 
       {YEARS.map(year => {
         const { male: men, female: women } = grouped[year]
         if (men.length === 0 && women.length === 0) return null
         return (
-          <div key={year} className="year-section">
-            <h3>{year}</h3>
-
-            <h4>{team.menLabel}</h4>
-            <div className="members-grid">
-              {men.map((m, i) => <MemberCard key={i} m={m} />)}
+          <div key={year} className="year-section fade-up">
+            <div className="year-badge">
+              <span className="year-badge-label">{year}</span>
+              <div className="year-badge-line" />
             </div>
 
-            <h4>{team.womenLabel}</h4>
-            <div className="members-grid">
-              {women.map((m, i) => <MemberCard key={i} m={m} />)}
-            </div>
+            {men.length > 0 && (
+              <div className="gender-section">
+                <div className="gender-label">{team.menLabel}</div>
+                <div className="members-grid">
+                  {men.map((m, i) => <MemberCard key={i} m={m} />)}
+                </div>
+              </div>
+            )}
+
+            {women.length > 0 && (
+              <div className="gender-section">
+                <div className="gender-label">{team.womenLabel}</div>
+                <div className="members-grid">
+                  {women.map((m, i) => <MemberCard key={i} m={m} />)}
+                </div>
+              </div>
+            )}
           </div>
         )
       })}

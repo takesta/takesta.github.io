@@ -1,45 +1,68 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import data from '../../content/prospective.json'
 
 function Prospective() {
   const { orientationSession, line } = data
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
+      { threshold: 0.08 }
+    )
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <div className="container">
-      <h2>{data.pageTitle}</h2>
+    <div className="container page-content">
+      <div className="section-heading fade-up">
+        <h2>{data.pageTitle}</h2>
+        <div className="section-heading-divider"><span /></div>
+      </div>
 
-      <p>{data.intro}</p>
+      <div className="fade-up">
+        <div className="description-block">{data.intro}</div>
 
-      <p>
-        {orientationSession.date}
-        {orientationSession.startTime}から{orientationSession.endTime}にかけて、
-        {orientationSession.format}にて入部説明会を開催いたします。
-      </p>
+        <div className="info-box">
+          <p>
+            <strong>{orientationSession.date}</strong>、{orientationSession.startTime}〜{orientationSession.endTime}に
+            {orientationSession.format}にて入部説明会を開催いたします。
+          </p>
+          <p>
+            参加希望の方はLINE公式アカウント「<strong>{line.accountName}</strong>」（LINE ID：{line.id}）を
+            追加のうえ、<strong>{line.deadline}</strong>までに以下の項目をご送信ください。
+          </p>
+          <ul style={{ margin: '12px 0 0', paddingLeft: '1.4rem' }}>
+            {data.requiredFields.map(field => (
+              <li key={field} style={{ marginBottom: '4px' }}>{field}</li>
+            ))}
+          </ul>
+        </div>
 
-      <p>
-        説明会への参加を希望される方は、LINE公式アカウント「{line.accountName}」（LINE ID：{line.id}）を
-        追加のうえ、{line.deadline}までに以下の項目をご送信ください。
-      </p>
-      <ul>
-        {data.requiredFields.map(field => (
-          <li key={field}>{field}</li>
-        ))}
-      </ul>
+        <p style={{ color: 'var(--gray-600)', fontSize: '0.95rem' }}>{data.mandatoryNote}</p>
+        <p style={{ color: 'var(--gray-600)', fontSize: '0.9rem', fontStyle: 'italic' }}>{data.formNote}</p>
+      </div>
 
-      <p>{data.mandatoryNote}</p>
+      <div className="fade-up">
+        <h3 style={{ color: 'var(--navy)', fontSize: '1.2rem', margin: '3rem 0 1.5rem', letterSpacing: '0.04em' }}>
+          {data.timelineHeading}
+        </h3>
+        <div className="timeline">
+          {data.timeline.map((step, i) => (
+            <div key={i} className="timeline-item">
+              <div className="timeline-dot" />
+              <p className="timeline-label">{step.label}</p>
+              <p className="timeline-date">{step.date}</p>
+              {step.time && <p className="timeline-date" style={{ color: 'var(--gray-600)', fontSize: '0.95rem' }}>{step.time}</p>}
+              {step.note && <p className="timeline-note">※{step.note}</p>}
+            </div>
+          ))}
+        </div>
 
-      <p>{data.formNote}</p>
-
-      <h3>{data.timelineHeading}</h3>
-      {data.timeline.map((step, i) => (
-        <p key={i}>
-          <strong>{step.label}</strong><br />
-          {step.date}
-          {step.time && <><br />{step.time}</>}
-          {step.note && <><br />※{step.note}</>}
-        </p>
-      ))}
-
-      <p>{data.closing}</p>
+        <div className="info-box" style={{ marginTop: '2rem' }}>
+          <p>{data.closing}</p>
+        </div>
+      </div>
     </div>
   )
 }
