@@ -2,12 +2,12 @@
 
 /* ===== CSS Variables ===== */
 :root {
-  --navy: #003366;
-  --navy-dark: #002244;
-  --navy-light: #1a4d8c;
-  --gold: #C9A84C;
-  --gold-light: #e0c070;
-  --gold-dark: #a07830;
+  --navy: #001E62;
+  --navy-dark: #001040;
+  --navy-light: #1a3d8c;
+  --gold: #F1C400;
+  --gold-light: #f5d640;
+  --gold-dark: #c9a500;
   --white: #ffffff;
   --off-white: #f7f5f0;
   --gray-50: #fafafa;
@@ -246,12 +246,13 @@ nav ul li a:hover::after {
 .hero-text h2 {
   color: var(--white);
   font-family: 'Playfair Display', serif;
-  font-size: 64px;
+  font-size: clamp(26px, 6vw, 64px);
   font-weight: 700;
   letter-spacing: 0.02em;
   line-height: 1.15;
   margin: 0 0 12px;
   text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  white-space: nowrap;
 }
 
 .hero-text p {
@@ -910,17 +911,13 @@ footer {
     min-height: 500px;
   }
 
-  .hero-text h2 {
-    font-size: 36px;
-  }
-
   .hero-text p {
-    font-size: 13px;
-    letter-spacing: 0.1em;
+    font-size: 11px;
+    letter-spacing: 0.08em;
   }
 
   .hero-eyebrow {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .section-heading h2 {

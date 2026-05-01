@@ -21,6 +21,7 @@ function AppInner() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
+  const isHome = location.pathname === '/'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -50,7 +51,7 @@ function AppInner() {
 
   return (
     <div className="App">
-      <header className={`App-header${scrolled ? ' scrolled' : ''}`}>
+      <header className={`App-header${scrolled || !isHome ? ' scrolled' : ''}`}>
         <div className="container">
           <div className="logo">
             <h1><Link to="/">{siteTitle}</Link></h1>
