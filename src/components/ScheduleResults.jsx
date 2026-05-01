@@ -26,6 +26,7 @@ function ScheduleResults() {
         <h3 style={{ color: 'var(--navy)', marginBottom: '1.5rem', fontSize: '1.1rem', letterSpacing: '0.05em' }}>
           {labels.annualHeading}
         </h3>
+        <div className="schedule-table-wrapper">
         <table className="schedule-table">
           <thead>
             <tr>
@@ -44,6 +45,7 @@ function ScheduleResults() {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   )
