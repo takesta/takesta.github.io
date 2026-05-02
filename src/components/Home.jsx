@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import ContactSection from './ContactSection'
 import content from '../../content/content.json'
@@ -7,6 +7,35 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation'
 function Home() {
   const { home, about } = content
   useScrollAnimation()
+
+  useEffect(() => {
+    const heroImg = document.querySelector('.hero-bg')
+    if (!heroImg) return
+
+    const update = () => {
+      const progress = Math.min(window.scrollY / window.innerHeight, 1)
+      const scale = 1.12 - 0.12 * progress
+      heroImg.style.transform = `scale(${scale})`
+    }
+
+    update()
+
+    let raf = null
+    const onScroll = () => {
+      if (raf) return
+      raf = requestAnimationFrame(() => {
+        update()
+        raf = null
+      })
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+      heroImg.style.transform = ''
+    }
+  }, [])
 
   return (
     <div>
