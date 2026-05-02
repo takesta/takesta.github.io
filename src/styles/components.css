@@ -1,0 +1,360 @@
+/* ===== About description ===== */
+.description-block {
+  background: var(--white);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  box-shadow: var(--shadow-sm);
+  font-size: 1.05rem;
+  line-height: 2;
+  margin: 0 0 3rem;
+  padding: 24px 32px;
+}
+
+/* ===== Schedule ===== */
+.schedule-item {
+  background-color: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  padding: 24px 28px;
+  transition: var(--transition);
+}
+
+.schedule-item:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.schedule-item h3 {
+  color: var(--navy);
+  margin-top: 0;
+}
+
+/* ===== Schedule table ===== */
+.schedule-table-wrapper {
+  border-radius: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.schedule-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.schedule-table thead {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.schedule-table th {
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  padding: 14px 20px;
+  text-align: left;
+}
+
+.schedule-table th:first-child {
+  border-radius: 8px 0 0 0;
+  width: 100px;
+}
+
+.schedule-table th:last-child {
+  border-radius: 0 8px 0 0;
+}
+
+.schedule-table tbody tr {
+  border-bottom: 1px solid var(--gray-200);
+  transition: background 0.2s;
+}
+
+.schedule-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.schedule-table tbody tr:hover {
+  background-color: var(--off-white);
+}
+
+.schedule-table tbody tr:nth-child(even) {
+  background-color: var(--gray-50);
+}
+
+.schedule-table tbody tr:nth-child(even):hover {
+  background-color: var(--off-white);
+}
+
+.schedule-table td {
+  padding: 14px 20px;
+  vertical-align: top;
+}
+
+.schedule-month {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.schedule-events {
+  color: var(--gray-600);
+  font-size: 0.95rem;
+}
+
+/* ===== Team page ===== */
+#team {
+  padding: 80px 0;
+}
+
+.year-section {
+  margin-bottom: 4rem;
+}
+
+.year-badge {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  margin-bottom: 2rem;
+}
+
+.year-badge-label {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding: 8px 20px;
+  white-space: nowrap;
+}
+
+.year-badge-line {
+  background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+  flex: 1;
+  height: 2px;
+}
+
+.gender-section {
+  margin-bottom: 2.5rem;
+}
+
+.gender-label {
+  align-items: center;
+  color: var(--gray-600);
+  display: flex;
+  font-size: 0.9rem;
+  font-weight: 700;
+  gap: 8px;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+.gender-label::after {
+  background: var(--gray-200);
+  content: '';
+  flex: 1;
+  height: 1px;
+}
+
+.members-grid {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.team-member-card {
+  background-color: var(--white);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-6px);
+}
+
+.member-photo-wrap {
+  margin: 0 auto 0.75rem;
+  width: 90px;
+  height: 90px;
+}
+
+.member-photo {
+  border: 3px solid var(--gold-light);
+  border-radius: 50%;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.member-photo-placeholder {
+  background: linear-gradient(135deg, #c5d5e8 0%, #7a9cbf 100%);
+  border-radius: 50%;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.member-photo-placeholder::after {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  bottom: 0;
+  content: '';
+  height: 55%;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%) translateY(30%);
+  width: 70%;
+}
+
+.member-photo-placeholder::before {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  content: '';
+  height: 35%;
+  left: 50%;
+  position: absolute;
+  top: 18%;
+  transform: translateX(-50%);
+  width: 35%;
+}
+
+.member-title-badge {
+  background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 100%);
+  border-radius: 4px;
+  color: var(--white);
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+  padding: 3px 10px;
+}
+
+.member-name {
+  color: var(--gray-800);
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ===== Contact / Social Links ===== */
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.social-link-card {
+  align-items: center;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  color: var(--navy);
+  display: flex;
+  gap: 12px;
+  padding: 16px 24px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.social-link-card:hover {
+  background: var(--navy);
+  border-color: var(--navy);
+  box-shadow: var(--shadow-md);
+  color: var(--white);
+  transform: translateY(-3px);
+}
+
+.social-link-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.social-link-handle {
+  color: var(--gold-dark);
+  font-size: 0.95rem;
+}
+
+.social-link-card:hover .social-link-handle {
+  color: var(--gold-light);
+}
+
+/* ===== Prospective / Timeline ===== */
+.timeline {
+  margin: 2rem 0;
+  position: relative;
+}
+
+.timeline::before {
+  background: linear-gradient(to bottom, var(--gold), var(--navy));
+  bottom: 0;
+  content: '';
+  left: 20px;
+  position: absolute;
+  top: 0;
+  width: 2px;
+}
+
+.timeline-item {
+  margin-bottom: 2rem;
+  padding-left: 56px;
+  position: relative;
+}
+
+.timeline-dot {
+  background: var(--gold);
+  border: 3px solid var(--white);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--gold);
+  height: 16px;
+  left: 13px;
+  position: absolute;
+  top: 4px;
+  width: 16px;
+}
+
+.timeline-label {
+  color: var(--navy);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin: 0 0 4px;
+  text-transform: uppercase;
+}
+
+.timeline-date {
+  color: var(--gray-800);
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0 2px;
+}
+
+.timeline-note {
+  color: var(--gray-600);
+  font-size: 0.9rem;
+  margin: 4px 0 0;
+}
+
+.info-box {
+  background: var(--off-white);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  margin: 2rem 0;
+  padding: 24px 28px;
+}
+
+.info-box p {
+  margin: 0 0 12px;
+}
+
+.info-box p:last-child {
+  margin: 0;
+}

@@ -1,6 +1,8 @@
-import React, { useMemo, useEffect } from 'react'
+import React, { useMemo } from 'react'
+import { Helmet } from 'react-helmet-async'
 import content from '../../content/content.json'
 import membersData from '../../content/members.json'
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 const YEARS = ['4年', '3年', '2年', '1年']
 
@@ -12,14 +14,7 @@ function Team() {
   const { team } = content
   const { captains } = membersData
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.08 }
-    )
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
+  useScrollAnimation(0.08)
 
   const titleMap = useMemo(() => {
     const map = {}
@@ -60,6 +55,11 @@ function Team() {
 
   return (
     <section id="team" className="container page-content">
+      <Helmet>
+        <title>部員紹介 | 慶應義塾體育會ゴルフ部</title>
+        <meta name="description" content="慶應義塾體育會ゴルフ部の部員紹介。男子・女子、各学年の部員一覧です。" />
+        <link rel="canonical" href="https://keiogolf.com/team" />
+      </Helmet>
       <div className="section-heading fade-up">
         <h2>{team.title}</h2>
         <div className="section-heading-divider"><span /></div>
