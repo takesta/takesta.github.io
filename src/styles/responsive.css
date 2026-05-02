@@ -36,8 +36,8 @@
   }
 
   .hero {
-    height: min(100svh, 75vw);
-    min-height: 400px;
+    height: 100svh;
+    min-height: 500px;
   }
 
   .hero-text h2 {
@@ -92,12 +92,5 @@
   .social-link-card {
     width: 100%;
     max-width: 320px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero {
-    height: max(70vw, 300px);
-    min-height: unset;
   }
 }
