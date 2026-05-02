@@ -36,13 +36,12 @@
   }
 
   .hero {
-    height: min(100svh, 75vw);
-    min-height: 400px;
+    height: 100svh;
+    min-height: 500px;
   }
 
   .hero-text h2 {
-    font-size: min(36px, 7.5vw);
-    white-space: nowrap;
+    font-size: clamp(28px, 7vw, 40px);
   }
 
   .hero-text p {
@@ -55,11 +54,11 @@
   }
 
   .section-heading h2 {
-    font-size: 1.6rem;
+    font-size: 1.35rem;
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 
   .description-block {
@@ -96,8 +95,7 @@
 }
 
 @media (max-width: 480px) {
-  .hero {
-    height: max(70vw, 300px);
-    min-height: unset;
+  .hero-text h2 {
+    font-size: clamp(24px, 6.5vw, 32px);
   }
 }
