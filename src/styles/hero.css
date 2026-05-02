@@ -13,13 +13,17 @@
 }
 
 .hero-bg {
+  backface-visibility: hidden;
   height: 100%;
   left: 0;
   object-fit: cover;
   object-position: center;
   position: absolute;
   top: 0;
+  transform: scale(1.12);
+  transform-origin: center center;
   width: 100%;
+  will-change: transform;
   z-index: 0;
 }
 
