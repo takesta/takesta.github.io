@@ -5,7 +5,7 @@
     "home": "ホーム",
     "about": "部について",
     "team": "部員紹介",
-    "schedule": "試合日程・結果",
+    "schedule": "年間スケジュール",
     "prospective": "入部希望の方へ",
     "contact": "お問い合わせ"
   },
@@ -28,7 +28,7 @@
     "loadingMessage": "読み込み中..."
   },
   "schedule": {
-    "title": "試合日程・結果",
+    "title": "年間スケジュール",
     "annualHeading": "年間予定"
   },
   "contact": {

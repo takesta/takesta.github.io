@@ -1,6 +1,9 @@
 {
   "$schema": "./schemas/prospective.schema.json",
-  "pageTitle": "2026年度 新歓のお知らせ",
+  "pageTitle": "入部希望の方へ",
+  "closed": true,
+  "closedMessage": "2026年度の新入部員募集は締め切りました。",
+  "closedNote": "次年度以降の募集については、Instagram・X等のSNSにてお知らせいたします。ご関心をお持ちの方はぜひフォローください。",
   "intro": "慶應義塾體育會ゴルフ部では、2026年度の新入部員を募集しております。ゴルフ経験者はもちろん、大学からゴルフを始めたい方のご参加も歓迎いたします。",
   "orientationSession": {
     "date": "2026年4月4日土曜日",
