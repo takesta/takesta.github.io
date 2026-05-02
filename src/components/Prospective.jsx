@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
 import data from '../../content/prospective.json'
+import ContactSection from './ContactSection'
 
 function Prospective() {
-  const { orientationSession, line } = data
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
@@ -12,6 +11,32 @@ function Prospective() {
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el))
     return () => observer.disconnect()
   }, [])
+
+  if (data.closed) {
+    return (
+      <div className="container page-content">
+        <div className="section-heading fade-up">
+          <h2>{data.pageTitle}</h2>
+          <div className="section-heading-divider"><span /></div>
+        </div>
+
+        <div className="fade-up">
+          <div className="info-box" style={{ textAlign: 'center', padding: '2.5rem 2rem' }}>
+            <p style={{ fontSize: '1.15rem', fontWeight: '600', color: 'var(--navy)', marginBottom: '1rem' }}>
+              {data.closedMessage}
+            </p>
+            <p style={{ color: 'var(--gray-600)', fontSize: '0.95rem' }}>{data.closedNote}</p>
+          </div>
+        </div>
+
+        <div className="fade-up" style={{ marginTop: '3rem' }}>
+          <ContactSection />
+        </div>
+      </div>
+    )
+  }
+
+  const { orientationSession, line } = data
 
   return (
     <div className="container page-content">
