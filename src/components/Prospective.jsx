@@ -1,20 +1,24 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import { Helmet } from 'react-helmet-async'
 import data from '../../content/prospective.json'
 import ContactSection from './ContactSection'
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 function Prospective() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.08 }
-    )
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
+  useScrollAnimation(0.08)
+
+  const helmetMeta = (
+    <Helmet>
+      <title>入部希望の方へ | 慶應義塾體育會ゴルフ部</title>
+      <meta name="description" content="慶應義塾體育會ゴルフ部への入部案内。説明会情報・入部フローをご確認ください。" />
+      <link rel="canonical" href="https://keiogolf.com/prospective" />
+    </Helmet>
+  )
 
   if (data.closed) {
     return (
       <div className="container page-content">
+        {helmetMeta}
         <div className="section-heading fade-up">
           <h2>{data.pageTitle}</h2>
           <div className="section-heading-divider"><span /></div>
@@ -40,6 +44,7 @@ function Prospective() {
 
   return (
     <div className="container page-content">
+      {helmetMeta}
       <div className="section-heading fade-up">
         <h2>{data.pageTitle}</h2>
         <div className="section-heading-divider"><span /></div>

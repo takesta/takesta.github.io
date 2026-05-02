@@ -1,22 +1,21 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import { Helmet } from 'react-helmet-async'
 import content from '../../content/content.json'
 import scheduleData from '../../content/schedule.json'
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 function ScheduleResults() {
   const { schedule: labels } = content
   const { schedule } = scheduleData
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.08 }
-    )
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
+  useScrollAnimation(0.08)
 
   return (
     <div className="container page-content">
+      <Helmet>
+        <title>年間スケジュール | 慶應義塾體育會ゴルフ部</title>
+        <meta name="description" content="慶應義塾體育會ゴルフ部の年間試合スケジュール・結果一覧です。" />
+        <link rel="canonical" href="https://keiogolf.com/schedule-results" />
+      </Helmet>
       <div className="section-heading fade-up">
         <h2>{labels.title}</h2>
         <div className="section-heading-divider"><span /></div>

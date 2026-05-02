@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import { Helmet } from 'react-helmet-async'
 import ContactSection from './ContactSection'
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 function Contact() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.08 }
-    )
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
+  useScrollAnimation(0.08)
 
   return (
     <div className="container page-content">
+      <Helmet>
+        <title>お問い合わせ | 慶應義塾體育會ゴルフ部</title>
+        <meta name="description" content="慶應義塾體育會ゴルフ部へのお問い合わせはInstagramのDMまたはX（旧Twitter）からどうぞ。" />
+        <link rel="canonical" href="https://keiogolf.com/contact" />
+      </Helmet>
       <div className="fade-up">
         <ContactSection />
       </div>

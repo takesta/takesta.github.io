@@ -1,0 +1,22 @@
+/* ===== CSS Variables ===== */
+:root {
+  --navy: #003366;
+  --navy-dark: #002244;
+  --navy-light: #1a4d8c;
+  --gold: #F1C400;
+  --gold-light: #F5D640;
+  --gold-dark: #C9A200;
+  --white: #ffffff;
+  --off-white: #f7f5f0;
+  --gray-50: #fafafa;
+  --gray-100: #f2f2f2;
+  --gray-200: #e5e5e5;
+  --gray-400: #9ca3af;
+  --gray-600: #6b7280;
+  --gray-800: #333;
+  --text: #222;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md: 0 6px 20px rgba(0,0,0,0.12);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.18);
+  --transition: all 0.3s ease;
+}
