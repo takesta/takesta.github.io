@@ -74,6 +74,18 @@
     "closing": {
       "type": "string",
       "description": "ページ末尾の問い合わせ案内。"
+    },
+    "closed": {
+      "type": "boolean",
+      "description": "true のとき募集締切画面を表示する。"
+    },
+    "closedMessage": {
+      "type": "string",
+      "description": "締切時に表示するメインメッセージ。"
+    },
+    "closedNote": {
+      "type": "string",
+      "description": "締切時に表示する補足メッセージ（SNS誘導など）。"
     }
   }
 }
