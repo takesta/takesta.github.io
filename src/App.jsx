@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes, NavLink, useLocation } from 're
 import Home from './components/Home'
 import Team from './components/Team'
 import About from './components/About'
-import ScheduleResults from './components/ScheduleResults'
 import Prospective from './components/Prospective'
 import Contact from './components/Contact'
 import content from '../content/content.json'
@@ -108,7 +107,6 @@ function AppInner() {
     { to: '/', label: nav.home },
     { to: '/about', label: nav.about },
     { to: '/team', label: nav.team },
-    { to: '/schedule-results', label: nav.schedule },
     { to: '/prospective', label: nav.prospective },
     { to: '/contact', label: nav.contact },
   ]
@@ -171,7 +169,6 @@ function AppInner() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/team" element={<Team />} />
-        <Route path="/schedule-results" element={<ScheduleResults />} />
         <Route path="/prospective" element={<Prospective />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
