@@ -36,12 +36,17 @@
     "description": "ご質問やご入部に関するお問い合わせは、InstagramのDMまでご連絡ください。",
     "socialLinks": [
       {
-        "label": "Instagram",
+        "label": "Instagram（男子部）",
         "handle": "@keio_golf_1922",
         "url": "https://www.instagram.com/keio_golf_1922"
       },
       {
-        "label": "X（旧Twitter）",
+        "label": "Instagram（女子部）",
+        "handle": "@keiogolf_72",
+        "url": "https://www.instagram.com/keiogolf_72"
+      },
+      {
+        "label": "X",
         "handle": "@KeioMensGolf",
         "url": "https://x.com/KeioMensGolf"
       },
