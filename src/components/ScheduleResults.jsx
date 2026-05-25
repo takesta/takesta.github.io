@@ -14,7 +14,7 @@ function ScheduleResults() {
       <Helmet>
         <title>年間スケジュール | 慶應義塾體育會ゴルフ部</title>
         <meta name="description" content="慶應義塾體育會ゴルフ部の年間試合スケジュール・結果一覧です。" />
-        <link rel="canonical" href="https://keiogolf.com/schedule-results" />
+        <link rel="canonical" href="https://keiogolf.com/schedule" />
       </Helmet>
       <div className="section-heading fade-up">
         <h2>{labels.title}</h2>

@@ -108,7 +108,7 @@ function AppInner() {
     { to: '/', label: nav.home },
     { to: '/about', label: nav.about },
     { to: '/team', label: nav.team },
-    { to: '/schedule-results', label: nav.schedule },
+    { to: '/schedule', label: nav.schedule },
     { to: '/prospective', label: nav.prospective },
     { to: '/contact', label: nav.contact },
   ]
@@ -171,7 +171,7 @@ function AppInner() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/team" element={<Team />} />
-        <Route path="/schedule-results" element={<ScheduleResults />} />
+        <Route path="/schedule" element={<ScheduleResults />} />
         <Route path="/prospective" element={<Prospective />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
