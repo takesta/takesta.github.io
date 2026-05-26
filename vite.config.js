@@ -10,6 +10,8 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
+          // すべての npm ライブラリを vendor にまとめ安定したキャッシュを確保
+          // ルートコンポーネントは React.lazy で自動的に個別チャンクになる
           vendor: ['react', 'react-dom', 'react-router-dom', 'react-helmet-async'],
         },
       },

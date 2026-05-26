@@ -47,8 +47,13 @@ function Home() {
       <section className="hero page-content-hero">
         <picture>
           <source
+            type="image/avif"
+            srcSet="/assets/hero-image-480.avif 480w, /assets/hero-image-768.avif 768w, /assets/hero-image-1280.avif 1280w, /assets/hero-image-1920.avif 1920w"
+            sizes="100vw"
+          />
+          <source
             type="image/webp"
-            srcSet="/assets/hero-image-768.webp 768w, /assets/hero-image-1280.webp 1280w, /assets/hero-image-1920.webp 1920w"
+            srcSet="/assets/hero-image-480.webp 480w, /assets/hero-image-768.webp 768w, /assets/hero-image-1280.webp 1280w, /assets/hero-image-1920.webp 1920w"
             sizes="100vw"
           />
           <img
