@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback, Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Routes, NavLink, useLocation } from 'react-router-dom'
 import Home from './components/Home'
-import Team from './components/Team'
-import About from './components/About'
-import Prospective from './components/Prospective'
-import Contact from './components/Contact'
 import content from '../content/content.json'
+
+// ホーム以外のページは遅延ロード（初期バンドルサイズを削減）
+const Team = lazy(() => import('./components/Team'))
+const About = lazy(() => import('./components/About'))
+const Prospective = lazy(() => import('./components/Prospective'))
+const Contact = lazy(() => import('./components/Contact'))
 
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
@@ -165,13 +167,15 @@ function AppInner() {
         />
       )}
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/team" element={<Team />} />
-        <Route path="/prospective" element={<Prospective />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/prospective" element={<Prospective />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </Suspense>
 
       <footer>
         <div className="container">
