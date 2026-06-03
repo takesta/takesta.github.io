@@ -1,7 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet-async'
 import data from '../../content/prospective.json'
-import ContactSection from './ContactSection'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 function Prospective() {
@@ -33,9 +32,6 @@ function Prospective() {
           </div>
         </div>
 
-        <div className="fade-up" style={{ marginTop: '3rem' }}>
-          <ContactSection />
-        </div>
       </div>
     )
   }
