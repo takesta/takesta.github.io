@@ -189,13 +189,7 @@ function AppInner() {
             <div className="footer-nav">
               <h4>Navigation</h4>
               <ul>
-                {navItems.map(({ to, label }) => (
-                  <li key={to}>
-                    <NavLink to={to} end={to === '/'}>
-                      {label}
-                    </NavLink>
-                  </li>
-                ))}
+                <NavLinks items={navItems} />
               </ul>
             </div>
 

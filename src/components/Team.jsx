@@ -10,6 +10,21 @@ function normalize(name) {
   return name.replace(/\s/g, '')
 }
 
+function MemberCard({ m, title }) {
+  return (
+    <div className="team-member-card">
+      <div className="member-photo-wrap">
+        {m.photo
+          ? <img src={`/assets/members/${m.photo}`} alt={m.name} className="member-photo" />
+          : <div className="member-photo-placeholder" />
+        }
+      </div>
+      {title && <span className="member-title-badge">{title}</span>}
+      <p className="member-name">{m.name}</p>
+    </div>
+  )
+}
+
 function Team() {
   const { team } = content
   const { captains } = membersData
@@ -37,22 +52,6 @@ function Team() {
     return map
   }, [])
 
-  function MemberCard({ m }) {
-    const title = titleMap[normalize(m.name)]
-    return (
-      <div className="team-member-card">
-        <div className="member-photo-wrap">
-          {m.photo
-            ? <img src={`/assets/members/${m.photo}`} alt={m.name} className="member-photo" />
-            : <div className="member-photo-placeholder" />
-          }
-        </div>
-        {title && <span className="member-title-badge">{title}</span>}
-        <p className="member-name">{m.name}</p>
-      </div>
-    )
-  }
-
   return (
     <section id="team" className="container page-content">
       <Helmet>
@@ -79,7 +78,7 @@ function Team() {
               <div className="gender-section">
                 <div className="gender-label">{team.menLabel}</div>
                 <div className="members-grid">
-                  {men.map((m, i) => <MemberCard key={i} m={m} />)}
+                  {men.map((m, i) => <MemberCard key={i} m={m} title={titleMap[normalize(m.name)]} />)}
                 </div>
               </div>
             )}
@@ -88,7 +87,7 @@ function Team() {
               <div className="gender-section">
                 <div className="gender-label">{team.womenLabel}</div>
                 <div className="members-grid">
-                  {women.map((m, i) => <MemberCard key={i} m={m} />)}
+                  {women.map((m, i) => <MemberCard key={i} m={m} title={titleMap[normalize(m.name)]} />)}
                 </div>
               </div>
             )}
