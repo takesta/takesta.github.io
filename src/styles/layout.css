@@ -150,22 +150,59 @@ nav ul li a.active {
 
 /* ===== Mobile drawer ===== */
 .mobile-menu {
-  background: var(--white);
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 100%);
   bottom: 0;
+  color: var(--white);
   display: none;
+  flex-direction: column;
   overflow-y: auto;
-  padding: 80px 24px 40px;
+  -webkit-overflow-scrolling: touch;
+  padding: calc(96px + env(safe-area-inset-top)) 28px
+    calc(32px + env(safe-area-inset-bottom));
+  padding-right: calc(28px + env(safe-area-inset-right));
   position: fixed;
   right: 0;
   top: 0;
   transform: translateX(100%);
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  width: min(280px, 80vw);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  width: min(320px, 86vw);
   z-index: 900;
 }
 
 .mobile-menu.open {
   transform: translateX(0);
+}
+
+/* Drawer brand block */
+.mobile-menu-brand {
+  margin-bottom: 28px;
+}
+
+.mobile-menu-title {
+  color: var(--white);
+  display: block;
+  font-family: 'Playfair Display', 'Noto Sans JP', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.mobile-menu-eyebrow {
+  color: var(--gold-light);
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+.mobile-menu-gold-line {
+  background: linear-gradient(90deg, var(--gold), transparent);
+  display: block;
+  height: 2px;
+  margin-top: 16px;
+  width: 56px;
 }
 
 .mobile-menu ul {
@@ -175,29 +212,85 @@ nav ul li a.active {
 }
 
 .mobile-menu ul li {
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: block;
   margin: 0;
+  opacity: 0;
+  transform: translateX(16px);
+}
+
+.mobile-menu.open ul li {
+  animation: drawerItemIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(0.12s + var(--i) * 0.06s);
 }
 
 .mobile-menu ul li a {
-  color: var(--navy);
-  display: block;
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 14px 0;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.88);
+  display: flex;
+  font-size: 1rem;
+  font-weight: 500;
+  justify-content: space-between;
+  padding: 16px 4px;
   text-decoration: none;
-  transition: color 0.2s, padding-left 0.2s;
+  transition: color 0.2s ease, padding-left 0.25s ease;
 }
 
-.mobile-menu ul li a:hover,
+.mobile-menu ul li a .mobile-menu-arrow {
+  color: var(--gold);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.mobile-menu ul li a:active,
 .mobile-menu ul li a.active {
-  color: var(--gold-dark);
-  padding-left: 8px;
+  color: var(--gold-light);
+  padding-left: 12px;
+}
+
+.mobile-menu ul li a.active .mobile-menu-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Drawer social block */
+.mobile-menu-social {
+  margin-top: auto;
+  padding-top: 28px;
+}
+
+.mobile-menu-social-label {
+  color: var(--gold-light);
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.mobile-menu-social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-menu-social-links a {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.mobile-menu-social-links a:active {
+  color: var(--gold-light);
 }
 
 .mobile-overlay {
-  background: rgba(0, 20, 50, 0.5);
+  animation: overlayFadeIn 0.3s ease forwards;
+  backdrop-filter: blur(2px);
+  background: rgba(0, 17, 40, 0.55);
   bottom: 0;
   left: 0;
   position: fixed;

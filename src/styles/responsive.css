@@ -32,7 +32,7 @@
   }
 
   .mobile-menu {
-    display: block;
+    display: flex;
   }
 
   .hero {
@@ -94,8 +94,75 @@
   }
 }
 
+@media (max-width: 768px) {
+  /* Comfortable side padding + safe-area for notched devices */
+  .container {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+
+  main {
+    padding: 56px 0;
+  }
+
+  .page-content {
+    padding-top: 64px;
+  }
+
+  .section-heading {
+    margin-bottom: 2.2rem;
+  }
+
+  .section-heading h2 {
+    font-size: 1.6rem;
+  }
+
+  /* Larger tap targets in the footer */
+  .footer-nav ul li {
+    margin-bottom: 4px;
+  }
+
+  .footer-nav ul li a,
+  .footer-social-link {
+    display: inline-block;
+    padding: 6px 0;
+  }
+}
+
 @media (max-width: 480px) {
   .hero-text h2 {
     font-size: clamp(24px, 6.5vw, 32px);
+  }
+
+  .description-block {
+    border-radius: 0 6px 6px 0;
+    font-size: 1rem;
+    line-height: 1.9;
+    padding: 18px 18px;
+  }
+
+  .schedule-item {
+    padding: 18px 20px;
+  }
+
+  .info-box {
+    padding: 20px 20px;
+  }
+}
+
+/* ===== Touch devices: replace hover lifts with tap feedback ===== */
+@media (hover: none) {
+  .team-member-card:hover,
+  .schedule-item:hover,
+  .social-link-card:hover {
+    box-shadow: var(--shadow-sm);
+    transform: none;
+  }
+
+  .team-member-card:active,
+  .schedule-item:active,
+  .social-link-card:active {
+    box-shadow: var(--shadow-md);
+    transform: scale(0.98);
   }
 }

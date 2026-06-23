@@ -155,9 +155,50 @@ function AppInner() {
         aria-hidden={!menuOpen}
         inert={!menuOpen ? '' : undefined}
       >
+        <div className="mobile-menu-brand">
+          <span className="mobile-menu-title">{siteTitle}</span>
+          <span className="mobile-menu-eyebrow">KEIO UNIVERSITY GOLF TEAM</span>
+          <span className="mobile-menu-gold-line" />
+        </div>
         <ul>
-          <NavLinks items={navItems} onClick={closeMenu} />
+          {navItems.map(({ to, label }, i) => (
+            <li key={to} style={{ '--i': i }}>
+              <NavLink to={to} end={to === '/'} onClick={closeMenu}>
+                <span className="mobile-menu-label">{label}</span>
+                <svg
+                  className="mobile-menu-arrow"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </NavLink>
+            </li>
+          ))}
         </ul>
+        <div className="mobile-menu-social">
+          <span className="mobile-menu-social-label">Follow Us</span>
+          <div className="mobile-menu-social-links">
+            {contact.socialLinks.map((link) => (
+              <a
+                key={link.url}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
       </nav>
       {menuOpen && (
         <div
