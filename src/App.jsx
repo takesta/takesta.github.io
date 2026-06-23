@@ -12,6 +12,17 @@ const Contact = lazy(() => import('./components/Contact'))
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
+// ルート遷移時にスクロール位置を先頭へ戻す
+// （これがないと、フッターのリンク等から短いページ（お問い合わせ）へ遷移した際に
+//  スクロール位置が下端のままとなり、fade-up が IntersectionObserver で表示されず空白になる）
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
+
 function NavLinks({ items, onClick }) {
   return items.map(({ to, label }) => (
     <li key={to}>
@@ -264,6 +275,7 @@ function AppInner() {
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <AppInner />
     </Router>
   )
