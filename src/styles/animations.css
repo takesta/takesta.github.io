@@ -27,6 +27,19 @@
   50% { transform: translateX(-50%) translateY(8px); }
 }
 
+/* ===== Mobile drawer animations ===== */
+@keyframes drawerItemIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* ===== Reduced Motion ===== */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -50,5 +63,10 @@
 
   .scroll-indicator {
     animation: none;
+  }
+
+  .mobile-menu ul li {
+    opacity: 1;
+    transform: none;
   }
 }
