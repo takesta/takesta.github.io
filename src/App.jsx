@@ -108,7 +108,7 @@ function AppInner() {
   const navItems = [
     { to: '/', label: nav.home },
     { to: '/about', label: nav.about },
-    { to: '/team', label: nav.team },
+    { to: '/member', label: nav.team },
     { to: '/prospective', label: nav.prospective },
     { to: '/contact', label: nav.contact },
   ]
@@ -212,7 +212,7 @@ function AppInner() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/team" element={<Team />} />
+          <Route path="/member" element={<Team />} />
           <Route path="/prospective" element={<Prospective />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
