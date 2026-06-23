@@ -241,50 +241,115 @@
 }
 
 /* ===== Contact / Social Links ===== */
+.contact-description {
+  color: var(--gray-600);
+  margin: 0 auto 2.5rem;
+  max-width: 36rem;
+  text-align: center;
+}
+
 .social-links {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 16px;
-  justify-content: center;
-  margin-top: 2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0 auto;
+  max-width: 640px;
 }
 
 .social-link-card {
   align-items: center;
   background: var(--white);
   border: 1px solid var(--gray-200);
-  border-radius: 12px;
+  border-radius: 16px;
   box-shadow: var(--shadow-sm);
   color: var(--navy);
   display: flex;
-  gap: 12px;
-  padding: 16px 24px;
+  gap: 16px;
+  overflow: hidden;
+  padding: 18px 20px;
+  position: relative;
   text-decoration: none;
   transition: var(--transition);
 }
 
+/* Brand accent bar on the left edge */
+.social-link-card::before {
+  background: var(--brand, var(--navy));
+  content: '';
+  inset: 0 auto 0 0;
+  position: absolute;
+  transition: var(--transition);
+  width: 4px;
+}
+
 .social-link-card:hover {
-  background: var(--navy);
-  border-color: var(--navy);
+  border-color: var(--brand, var(--navy));
   box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.social-link-card--instagram { --brand: #d6249f; }
+.social-link-card--x { --brand: #111111; }
+.social-link-card--facebook { --brand: #1877f2; }
+
+.social-link-icon {
+  align-items: center;
+  background: var(--brand, var(--navy));
+  border-radius: 12px;
   color: var(--white);
-  transform: translateY(-3px);
+  display: flex;
+  flex-shrink: 0;
+  height: 44px;
+  justify-content: center;
+  width: 44px;
+}
+
+.social-link-icon svg {
+  fill: currentColor;
+  height: 24px;
+  width: 24px;
+}
+
+.social-link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
 
 .social-link-label {
-  font-size: 0.85rem;
+  color: var(--navy);
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .social-link-handle {
-  color: var(--gold-dark);
-  font-size: 0.95rem;
+  color: var(--gray-600);
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.social-link-card:hover .social-link-handle {
-  color: var(--gold-light);
+.social-link-arrow {
+  color: var(--gray-400);
+  display: flex;
+  margin-left: auto;
+  transition: var(--transition);
+}
+
+.social-link-arrow svg {
+  height: 20px;
+  width: 20px;
+}
+
+.social-link-card:hover .social-link-arrow {
+  color: var(--brand, var(--navy));
+  transform: translateX(4px);
 }
 
 /* ===== Prospective / Timeline ===== */
