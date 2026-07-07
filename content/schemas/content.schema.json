@@ -89,7 +89,7 @@
             "properties": {
               "label": { "type": "string", "description": "サービス名（例：Instagram）。" },
               "handle": { "type": "string", "description": "アカウント名（例：@keio_golf_1922）。" },
-              "url": { "type": "string", "format": "uri", "description": "リンク先のURL（https:// から始まる完全なURL）。" }
+              "url": { "type": "string", "format": "uri", "pattern": "^https://", "description": "リンク先のURL（https:// から始まる完全なURL）。" }
             }
           }
         }
