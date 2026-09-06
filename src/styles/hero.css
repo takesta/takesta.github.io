@@ -1,101 +1,93 @@
-/* ===== Hero ===== */
+/* =============================================================================
+   Hero — 写真は維持しつつ、タイポグラフィとコントラストをDADSに合わせる
+   ========================================================================== */
+
 .hero {
   align-items: center;
-  color: var(--white);
+  color: var(--color-neutral-white);
   display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: center;
-  min-height: 600px;
+  min-height: clamp(18rem, 46vh, 26rem);
   overflow: hidden;
+  padding-block: var(--space-12);
   position: relative;
-  text-align: center;
+}
+
+@media (min-width: 48em) {
+  .hero {
+    min-height: clamp(22rem, 52vh, 32rem);
+    padding-block: var(--space-16);
+  }
 }
 
 .hero-bg {
-  backface-visibility: hidden;
   height: 100%;
-  left: 0;
+  inset: 0;
   object-fit: cover;
   object-position: center;
   position: absolute;
-  top: 0;
-  transform: scale(1.12);
-  transform-origin: center center;
   width: 100%;
-  will-change: transform;
   z-index: 0;
 }
 
+/* 写真の明暗によらず白文字が 4.5:1 以上を確保できるよう、
+   キーカラー系の濃い色で全面をオーバーレイする。 */
 .hero::after {
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 30, 60, 0.55) 0%,
-    rgba(0, 20, 50, 0.75) 100%
-  );
-  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 22, 43, 0.72) 0%, rgba(0, 22, 43, 0.82) 100%);
   content: '';
-  left: 0;
+  inset: 0;
   position: absolute;
-  right: 0;
-  top: 0;
   z-index: 1;
 }
 
-.hero-text {
-  animation: heroFadeIn 1.2s ease forwards;
-  padding: 0 20px;
+.hero .container {
   position: relative;
+  width: 100%;
   z-index: 2;
 }
 
 .hero-eyebrow {
-  color: var(--gold-light);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  margin: 0 0 16px;
-  text-transform: uppercase;
+  color: var(--color-neutral-white);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-700);
+  letter-spacing: 0.12em;
+  line-height: var(--line-height-100);
+  margin: 0 0 var(--space-4);
 }
 
-.hero-text h2 {
-  color: var(--white);
-  font-family: 'Playfair Display', serif;
-  font-size: 64px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 1.15;
-  margin: 0 0 12px;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
-}
-
-.hero-text p {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: 0.2em;
+.hero-title {
+  color: var(--color-neutral-white);
+  font-size: var(--font-size-32);
+  font-weight: var(--font-weight-700);
+  letter-spacing: 0.01em;
+  line-height: var(--line-height-140);
   margin: 0;
-  text-transform: uppercase;
 }
 
-.hero-gold-line {
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  height: 1px;
-  margin: 20px auto;
-  width: 120px;
+/* 狭い端末で部名が折り返さないよう、1段階下のサイズに落とす */
+@media (max-width: 23.4375em) {
+  .hero-title {
+    font-size: var(--font-size-28);
+  }
 }
 
-.scroll-indicator {
-  animation: bounce 2s infinite;
-  bottom: 32px;
-  left: 50%;
-  position: absolute;
-  transform: translateX(-50%);
-  z-index: 2;
+@media (min-width: 48em) {
+  .hero-title {
+    font-size: var(--font-size-48);
+    letter-spacing: 0;
+  }
 }
 
-.scroll-indicator svg {
-  color: rgba(255,255,255,0.7);
-  height: 28px;
-  width: 28px;
+.hero-subtitle {
+  color: var(--color-neutral-white);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-400);
+  letter-spacing: 0.08em;
+  line-height: var(--line-height-150);
+  margin: var(--space-4) 0 0;
+}
+
+@media (min-width: 48em) {
+  .hero-subtitle {
+    font-size: var(--font-size-18);
+  }
 }

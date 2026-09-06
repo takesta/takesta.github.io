@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Routes, NavLink, useLocation } from 'react-router-dom'
+import ExternalLink from './components/ExternalLink'
 import Home from './components/Home'
 import content from '../content/content.json'
 
@@ -9,43 +10,36 @@ const About = lazy(() => import('./components/About'))
 const Prospective = lazy(() => import('./components/Prospective'))
 const Contact = lazy(() => import('./components/Contact'))
 
-const FOCUSABLE_SELECTOR =
-  'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
-function NavLinks({ items, onClick }) {
-  return items.map(({ to, label }) => (
-    <li key={to}>
-      <NavLink to={to} end={to === '/'} onClick={onClick}>
-        {label}
-      </NavLink>
-    </li>
-  ))
+function ChevronRightIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="mobile-menu-arrow"
+      fill="none"
+      height="16"
+      viewBox="0 0 24 24"
+      width="16"
+    >
+      <path
+        d="M9 18l6-6-6-6"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+    </svg>
+  )
 }
 
 function AppInner() {
   const { siteTitle, nav, footer, contact } = content
-  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
-  const isHome = location.pathname === '/'
 
   const hamburgerRef = useRef(null)
   const menuRef = useRef(null)
-
-  useEffect(() => {
-    let ticking = false
-    const onScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          setScrolled(window.scrollY > 60)
-          ticking = false
-        })
-        ticking = true
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   useEffect(() => {
     setMenuOpen(false)
@@ -58,7 +52,7 @@ function AppInner() {
     }
   }, [menuOpen])
 
-  // Focus first element when menu opens; return focus to hamburger when it closes
+  // メニューを開いたら先頭要素へフォーカスを移す
   useEffect(() => {
     if (menuOpen && menuRef.current) {
       const first = menuRef.current.querySelector(FOCUSABLE_SELECTOR)
@@ -66,7 +60,7 @@ function AppInner() {
     }
   }, [menuOpen])
 
-  // Focus trap + Escape key handler
+  // フォーカストラップ + Escape キー
   useEffect(() => {
     if (!menuOpen || !menuRef.current) return
 
@@ -88,11 +82,9 @@ function AppInner() {
           e.preventDefault()
           last.focus()
         }
-      } else {
-        if (document.activeElement === last) {
-          e.preventDefault()
-          first.focus()
-        }
+      } else if (document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
       }
     }
 
@@ -114,30 +106,47 @@ function AppInner() {
   ]
 
   return (
-    <div className="App">
-      <header className={`App-header${scrolled || !isHome ? ' scrolled' : ''}`}>
-        <div className="container">
-          <div className="logo">
-            <h1>
-              <NavLink to="/">{siteTitle}</NavLink>
-            </h1>
-          </div>
+    <>
+      <a className="skip-link" href="#main">
+        本文へスキップ
+      </a>
 
-          {/* Desktop nav */}
-          <nav className="nav-desktop" aria-label="メインナビゲーション">
+      <header className="site-header">
+        <div className="container site-header-inner">
+          <NavLink className="site-brand" to="/">
+            <img
+              alt=""
+              className="site-brand-logo"
+              height="40"
+              src="/assets/icons/logo512.png"
+              width="40"
+            />
+            <span className="site-brand-text">
+              <span className="site-brand-name">{siteTitle}</span>
+              <span className="site-brand-eyebrow">KEIO UNIVERSITY GOLF TEAM</span>
+            </span>
+          </NavLink>
+
+          <nav aria-label="メインナビゲーション" className="nav-desktop">
             <ul>
-              <NavLinks items={navItems} />
+              {navItems.map(({ to, label }) => (
+                <li key={to}>
+                  <NavLink end={to === '/'} to={to}>
+                    {label}
+                  </NavLink>
+                </li>
+              ))}
             </ul>
           </nav>
 
-          {/* Hamburger button */}
           <button
-            ref={hamburgerRef}
+            aria-controls="mobile-menu"
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? 'メニューを閉じる' : 'メニューを開く'}
             className={`hamburger${menuOpen ? ' open' : ''}`}
             onClick={() => setMenuOpen((v) => !v)}
-            aria-label={menuOpen ? 'メニューを閉じる' : 'メニューを開く'}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
+            ref={hamburgerRef}
+            type="button"
           >
             <span />
             <span />
@@ -146,109 +155,84 @@ function AppInner() {
         </div>
       </header>
 
-      {/* Mobile drawer */}
+      {/* モバイルドロワー */}
       <nav
-        id="mobile-menu"
-        ref={menuRef}
-        className={`mobile-menu${menuOpen ? ' open' : ''}`}
         aria-label="モバイルナビゲーション"
-        aria-hidden={!menuOpen}
+        className={`mobile-menu${menuOpen ? ' open' : ''}`}
+        id="mobile-menu"
         inert={!menuOpen ? '' : undefined}
+        ref={menuRef}
       >
-        <div className="mobile-menu-brand">
-          <span className="mobile-menu-title">{siteTitle}</span>
-          <span className="mobile-menu-eyebrow">KEIO UNIVERSITY GOLF TEAM</span>
-          <span className="mobile-menu-gold-line" />
-        </div>
+        <p className="mobile-menu-heading">メニュー</p>
         <ul>
-          {navItems.map(({ to, label }, i) => (
-            <li key={to} style={{ '--i': i }}>
-              <NavLink to={to} end={to === '/'} onClick={closeMenu}>
-                <span className="mobile-menu-label">{label}</span>
-                <svg
-                  className="mobile-menu-arrow"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
+          {navItems.map(({ to, label }) => (
+            <li key={to}>
+              <NavLink end={to === '/'} onClick={closeMenu} to={to}>
+                <span>{label}</span>
+                <ChevronRightIcon />
               </NavLink>
             </li>
           ))}
         </ul>
         <div className="mobile-menu-social">
-          <span className="mobile-menu-social-label">Follow Us</span>
+          <span className="mobile-menu-social-label">SNS</span>
           <div className="mobile-menu-social-links">
             {contact.socialLinks.map((link) => (
-              <a
-                key={link.url}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={closeMenu}
-              >
+              <ExternalLink href={link.url} key={link.url} onClick={closeMenu}>
                 {link.label}
-              </a>
+              </ExternalLink>
             ))}
           </div>
         </div>
       </nav>
-      {menuOpen && (
-        <div
-          className="mobile-overlay"
-          onClick={closeMenu}
-          aria-hidden="true"
-        />
-      )}
+      {menuOpen && <div aria-hidden="true" className="mobile-overlay" onClick={closeMenu} />}
 
-      <Suspense fallback={null}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/member" element={<Team />} />
-          <Route path="/prospective" element={<Prospective />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </Suspense>
+      <main id="main">
+        <Suspense fallback={null}>
+          <Routes>
+            <Route element={<Home />} path="/" />
+            <Route element={<About />} path="/about" />
+            <Route element={<Team />} path="/member" />
+            <Route element={<Prospective />} path="/prospective" />
+            <Route element={<Contact />} path="/contact" />
+          </Routes>
+        </Suspense>
+      </main>
 
-      <footer>
+      <footer className="site-footer">
         <div className="container">
           <div className="footer-grid">
-            <div className="footer-brand">
-              <h3>{siteTitle}</h3>
-              <div className="footer-gold-line" />
-              <p>1922年創部。日本最初の大学ゴルフ部として、技術の向上とゴルフ精神の涵養に励んでいます。</p>
+            <div>
+              <p className="footer-brand-name">{siteTitle}</p>
+              <p className="footer-brand-text">
+                1922年創部。日本最初の大学ゴルフ部として、技術の向上とゴルフ精神の涵養に励んでいます。
+              </p>
             </div>
 
-            <div className="footer-nav">
-              <h4>Navigation</h4>
-              <ul>
-                <NavLinks items={navItems} />
+            <div>
+              <h2 className="footer-heading">サイト内リンク</h2>
+              <ul className="footer-list">
+                {navItems.map(({ to, label }) => (
+                  <li key={to}>
+                    <NavLink end={to === '/'} to={to}>
+                      {label}
+                    </NavLink>
+                  </li>
+                ))}
               </ul>
             </div>
 
-            <div className="footer-social">
-              <h4>Follow Us</h4>
-              <div className="footer-social-links">
+            <div>
+              <h2 className="footer-heading">SNS</h2>
+              <ul className="footer-list">
                 {contact.socialLinks.map((link) => (
-                  <a
-                    key={link.url}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="footer-social-link"
-                  >
-                    {link.label}：{link.handle}
-                  </a>
+                  <li key={link.url}>
+                    <ExternalLink className="" href={link.url}>
+                      {link.label}
+                    </ExternalLink>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
 
@@ -257,7 +241,7 @@ function AppInner() {
           </div>
         </div>
       </footer>
-    </div>
+    </>
   )
 }
 
