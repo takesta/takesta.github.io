@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { Helmet } from 'react-helmet-async'
+import PageHeader from './PageHeader'
 import content from '../../content/content.json'
 import membersData from '../../content/members.json'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
@@ -10,16 +11,29 @@ function normalize(name) {
   return name.replace(/\s/g, '')
 }
 
-function MemberCard({ m, title }) {
+function MemberPhotoPlaceholder() {
   return (
-    <div className="team-member-card">
+    <div className="member-photo-placeholder">
+      <svg aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z" />
+      </svg>
+    </div>
+  )
+}
+
+function MemberCard({ m, role }) {
+  return (
+    <div className="member-card">
       <div className="member-photo-wrap">
-        {m.photo
-          ? <img src={`/assets/members/${m.photo}`} alt={m.name} className="member-photo" />
-          : <div className="member-photo-placeholder" />
-        }
+        {m.photo ? (
+          <img alt="" className="member-photo" src={`/assets/members/${m.photo}`} />
+        ) : (
+          <MemberPhotoPlaceholder />
+        )}
       </div>
-      {title && <span className="member-title-badge">{title}</span>}
+      <span className="member-role-slot">
+        {role && <span className="member-role">{role}</span>}
+      </span>
       <p className="member-name">{m.name}</p>
     </div>
   )
@@ -31,7 +45,7 @@ function Team() {
 
   useScrollAnimation(0.08)
 
-  const titleMap = useMemo(() => {
+  const roleMap = useMemo(() => {
     const map = {}
     map[normalize(captains.menCaptain)] = team.captainLabel
     map[normalize(captains.menViceCaptain)] = team.viceCaptainLabel
@@ -52,49 +66,44 @@ function Team() {
     return map
   }, [])
 
+  const renderGroup = (label, members) => (
+    <div className="gender-group">
+      <h3 className="gender-heading">{label}</h3>
+      <ul className="members-grid">
+        {members.map((m, i) => (
+          <li key={`${m.name}-${i}`}>
+            <MemberCard m={m} role={roleMap[normalize(m.name)]} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+
   return (
-    <section id="team" className="container page-content">
+    <div className="container page-content">
       <Helmet>
         <title>部員紹介 | 慶應義塾體育會ゴルフ部</title>
-        <meta name="description" content="慶應義塾體育會ゴルフ部の部員紹介。男子・女子、各学年の部員一覧です。" />
-        <link rel="canonical" href="https://keiogolf.com/team" />
+        <meta
+          name="description"
+          content="慶應義塾體育會ゴルフ部の部員紹介。男子・女子、各学年の部員一覧です。"
+        />
+        <link rel="canonical" href="https://keiogolf.com/member" />
       </Helmet>
-      <div className="section-heading fade-up">
-        <h2>{team.title}</h2>
-        <div className="section-heading-divider"><span /></div>
-      </div>
 
-      {YEARS.map(year => {
+      <PageHeader title={team.title} />
+
+      {YEARS.map((year) => {
         const { male: men, female: women } = grouped[year]
         if (men.length === 0 && women.length === 0) return null
         return (
-          <div key={year} className="year-section fade-up">
-            <div className="year-badge">
-              <span className="year-badge-label">{year}</span>
-              <div className="year-badge-line" />
-            </div>
-
-            {men.length > 0 && (
-              <div className="gender-section">
-                <div className="gender-label">{team.menLabel}</div>
-                <div className="members-grid">
-                  {men.map((m, i) => <MemberCard key={i} m={m} title={titleMap[normalize(m.name)]} />)}
-                </div>
-              </div>
-            )}
-
-            {women.length > 0 && (
-              <div className="gender-section">
-                <div className="gender-label">{team.womenLabel}</div>
-                <div className="members-grid">
-                  {women.map((m, i) => <MemberCard key={i} m={m} title={titleMap[normalize(m.name)]} />)}
-                </div>
-              </div>
-            )}
-          </div>
+          <section className="year-group fade-up" key={year}>
+            <h2 className="section-title">{year}</h2>
+            {men.length > 0 && renderGroup(team.menLabel, men)}
+            {women.length > 0 && renderGroup(team.womenLabel, women)}
+          </section>
         )
       })}
-    </section>
+    </div>
   )
 }
 

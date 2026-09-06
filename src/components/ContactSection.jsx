@@ -17,6 +17,11 @@ const ICONS = {
       <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.52 1.49-3.91 3.78-3.91 1.1 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.44 2.9h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94Z" />
     </svg>
   ),
+  link: (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M10.6 13.4a1 1 0 0 1 0-1.4l1.4-1.4a1 1 0 1 1 1.4 1.4l-1.4 1.4a1 1 0 0 1-1.4 0Zm-3.3 5.3a4 4 0 0 1 0-5.7l2.1-2.1 1.4 1.4-2.1 2.1a2 2 0 0 0 2.9 2.9l2.1-2.1 1.4 1.4-2.1 2.1a4 4 0 0 1-5.7 0Zm9.4-3.6-1.4-1.4 2.1-2.1a2 2 0 1 0-2.9-2.9l-2.1 2.1-1.4-1.4 2.1-2.1a4 4 0 0 1 5.7 5.7l-2.1 2.1Z" />
+    </svg>
+  ),
 }
 
 function getPlatform(url) {
@@ -27,42 +32,58 @@ function getPlatform(url) {
   return 'link'
 }
 
-function ContactSection() {
+/**
+ * SNSリンク一覧。
+ * withHeading を渡した場合のみ h2 を出す（お問い合わせページでは h1 と重複するため省く）。
+ */
+function ContactSection({ withHeading = false }) {
   const { contact } = content
+
   return (
-    <section id="contact">
-      <div className="section-heading">
-        <h2>{contact.title}</h2>
-        <div className="section-heading-divider"><span /></div>
-      </div>
-      <p className="contact-description">{contact.description}</p>
-      <div className="social-links">
-        {contact.socialLinks.map(link => {
+    <section className="page-section fade-up">
+      {withHeading && <h2 className="section-title">{contact.title}</h2>}
+      <p className="prose">{contact.description}</p>
+
+      <ul className="social-links" style={{ marginTop: 'var(--space-6)' }}>
+        {contact.socialLinks.map((link) => {
           const platform = getPlatform(link.url)
           return (
-            <a
-              key={link.url}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`social-link-card social-link-card--${platform}`}
-            >
-              <span className="social-link-icon" aria-hidden="true">
-                {ICONS[platform]}
-              </span>
-              <span className="social-link-text">
-                <span className="social-link-label">{link.label}</span>
-                <span className="social-link-handle">{link.handle}</span>
-              </span>
-              <span className="social-link-arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-            </a>
+            <li key={link.url}>
+              <a
+                className="social-link-card"
+                href={link.url}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <span aria-hidden="true" className="social-link-icon">
+                  {ICONS[platform]}
+                </span>
+                <span className="social-link-text">
+                  <span className="social-link-label">{link.label}</span>
+                  <span className="social-link-handle">{link.handle}</span>
+                </span>
+                <span className="social-link-arrow">
+                  <svg
+                    aria-label="新規タブで開きます"
+                    fill="none"
+                    height="16"
+                    role="img"
+                    viewBox="0 0 16 17"
+                    width="16"
+                  >
+                    <path
+                      clipRule="evenodd"
+                      d="M3 13.5H13V9.16667H14V14.5H2V2.5H7.33333V3.5H3V13.5ZM9.33333 3.5V2.5H14V7.16667H13V4.23333L7 10.1667L6.33333 9.5L12.2667 3.5H9.33333Z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </span>
+              </a>
+            </li>
           )
         })}
-      </div>
+      </ul>
     </section>
   )
 }

@@ -1,143 +1,170 @@
-/* ===== Header ===== */
-.App-header {
-  background-color: rgba(255, 255, 255, 0);
-  left: 0;
-  padding: 20px 0;
-  position: fixed;
-  right: 0;
+/* =============================================================================
+   Layout — ヘッダー / ナビゲーション / ドロワー / パンくず
+   ========================================================================== */
+
+.site-header {
+  background-color: var(--color-neutral-white);
+  border-bottom: 1px solid var(--color-neutral-solid-gray-420);
+  padding-block: var(--space-3);
+  position: sticky;
   top: 0;
-  transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
   z-index: 1000;
 }
 
-.App-header.scrolled {
-  background-color: rgba(255, 255, 255, 0.97);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-  padding: 14px 0;
-}
-
-.App-header .container {
+.site-header-inner {
   align-items: center;
   display: flex;
+  gap: var(--space-4);
   justify-content: space-between;
 }
 
-/* ===== Logo ===== */
-.logo h1 {
+/* -----------------------------------------------------------------------------
+   ブランド
+   -------------------------------------------------------------------------- */
+.site-brand {
   align-items: center;
-  color: var(--white);
+  color: var(--color-key-900);
   display: flex;
-  font-size: 20px;
-  font-weight: 700;
-  gap: 12px;
-  margin: 0;
-  transition: color 0.4s ease;
-}
-
-.App-header.scrolled .logo h1 {
-  color: var(--navy);
-}
-
-.logo h1::before {
-  background: url(/assets/icons/logo512.png) center / contain no-repeat;
-  content: '';
-  height: 40px;
-  width: 40px;
-}
-
-.logo h1 a {
-  color: inherit;
+  gap: var(--space-3);
+  min-height: var(--min-touch-target);
   text-decoration: none;
 }
 
-/* ===== Nav ===== */
-nav ul {
+.site-brand:hover .site-brand-name {
+  text-decoration: underline;
+}
+
+.site-brand-logo {
+  flex-shrink: 0;
+  height: 2.25rem;
+  width: 2.25rem;
+}
+
+.site-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.site-brand-name {
+  color: var(--color-key-900);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-700);
+  letter-spacing: 0.02em;
+  line-height: var(--line-height-130);
+}
+
+.site-brand-eyebrow {
+  color: var(--color-neutral-solid-gray-536);
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-400);
+  letter-spacing: 0.08em;
+  line-height: var(--line-height-100);
+}
+
+@media (min-width: 48em) {
+  .site-brand-logo {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
+  .site-brand-name {
+    font-size: var(--font-size-18);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   デスクトップナビゲーション
+   -------------------------------------------------------------------------- */
+.nav-desktop {
+  display: none;
+}
+
+@media (min-width: 48em) {
+  .nav-desktop {
+    display: block;
+  }
+}
+
+.nav-desktop ul {
+  display: flex;
+  gap: var(--space-1);
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-nav ul li {
-  display: inline-block;
-  margin: 0 18px;
-}
-
-nav ul li a {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 15px;
-  font-weight: 500;
-  padding-bottom: 4px;
-  position: relative;
+.nav-desktop a {
+  align-items: center;
+  border-bottom: 0.1875rem solid transparent;
+  color: var(--color-neutral-solid-gray-900);
+  display: flex;
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-700);
+  letter-spacing: 0.02em;
+  line-height: var(--line-height-100);
+  min-height: var(--min-touch-target);
+  padding: var(--space-2) var(--space-3);
   text-decoration: none;
-  transition: color 0.3s ease;
 }
 
-.App-header.scrolled nav ul li a {
-  color: var(--gray-800);
+.nav-desktop a:hover {
+  background-color: var(--color-key-50);
+  color: var(--color-key-900);
+  text-decoration: underline;
 }
 
-nav ul li a:hover {
-  color: var(--gold-light);
+.nav-desktop a:active {
+  background-color: var(--color-key-100);
 }
 
-.App-header.scrolled nav ul li a:hover {
-  color: var(--navy);
+.nav-desktop a.active {
+  border-bottom-color: var(--color-key-900);
+  color: var(--color-key-900);
 }
 
-nav ul li a::after {
-  background-color: var(--gold);
-  bottom: 0;
-  content: '';
-  height: 2px;
-  left: 0;
-  position: absolute;
-  transition: width 0.3s ease;
-  width: 0;
-}
-
-nav ul li a:hover::after,
-nav ul li a.active::after {
-  width: 100%;
-}
-
-nav ul li a.active {
-  color: var(--gold-light);
-}
-
-.App-header.scrolled nav ul li a.active {
-  color: var(--navy);
-}
-
-/* ===== Hamburger button ===== */
+/* -----------------------------------------------------------------------------
+   ハンバーガーボタン
+   -------------------------------------------------------------------------- */
 .hamburger {
+  align-items: center;
   background: none;
-  border: none;
+  border: 1px solid var(--color-neutral-solid-gray-420);
+  border-radius: var(--border-radius-8);
+  color: var(--color-key-900);
   cursor: pointer;
-  display: none;
+  display: flex;
   flex-direction: column;
-  gap: 5px;
-  height: 36px;
+  gap: 0.3125rem;
+  height: var(--min-touch-target);
   justify-content: center;
-  padding: 4px;
-  width: 36px;
+  padding: var(--space-2);
+  width: var(--min-touch-target);
+}
+
+.hamburger:hover {
+  background-color: var(--color-key-50);
+}
+
+@media (min-width: 48em) {
+  .hamburger {
+    display: none;
+  }
 }
 
 .hamburger span {
-  background-color: var(--white);
-  border-radius: 2px;
+  background-color: currentColor;
+  border-radius: 1px;
   display: block;
   height: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.4s ease;
-  width: 24px;
-}
-
-.App-header.scrolled .hamburger span {
-  background-color: var(--navy);
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+  width: 1.25rem;
 }
 
 .hamburger.open span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+  transform: translateY(0.4375rem) rotate(45deg);
 }
 
 .hamburger.open span:nth-child(2) {
@@ -145,64 +172,49 @@ nav ul li a.active {
 }
 
 .hamburger.open span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+  transform: translateY(-0.4375rem) rotate(-45deg);
 }
 
-/* ===== Mobile drawer ===== */
+/* -----------------------------------------------------------------------------
+   モバイルドロワー
+   -------------------------------------------------------------------------- */
 .mobile-menu {
-  background: linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 100%);
+  background-color: var(--color-neutral-white);
+  border-left: 1px solid var(--color-neutral-solid-gray-420);
   bottom: 0;
-  color: var(--white);
-  display: none;
+  display: flex;
   flex-direction: column;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: calc(96px + env(safe-area-inset-top)) 28px
-    calc(32px + env(safe-area-inset-bottom));
-  padding-right: calc(28px + env(safe-area-inset-right));
+  padding: var(--space-6) var(--space-5) calc(var(--space-8) + env(safe-area-inset-bottom));
+  padding-right: max(var(--space-5), env(safe-area-inset-right));
   position: fixed;
   right: 0;
   top: 0;
   transform: translateX(100%);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  width: min(320px, 86vw);
-  z-index: 900;
+  transition: transform 0.25s ease;
+  width: min(20rem, 86vw);
+  z-index: 1010;
 }
 
 .mobile-menu.open {
   transform: translateX(0);
 }
 
-/* Drawer brand block */
-.mobile-menu-brand {
-  margin-bottom: 28px;
+@media (min-width: 48em) {
+  .mobile-menu {
+    display: none;
+  }
 }
 
-.mobile-menu-title {
-  color: var(--white);
-  display: block;
-  font-family: 'Playfair Display', 'Noto Sans JP', serif;
-  font-size: 1.15rem;
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-.mobile-menu-eyebrow {
-  color: var(--gold-light);
-  display: block;
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  margin-top: 6px;
-  text-transform: uppercase;
-}
-
-.mobile-menu-gold-line {
-  background: linear-gradient(90deg, var(--gold), transparent);
-  display: block;
-  height: 2px;
-  margin-top: 16px;
-  width: 56px;
+.mobile-menu-heading {
+  border-bottom: 1px solid var(--color-neutral-solid-gray-420);
+  color: var(--color-neutral-solid-gray-536);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-700);
+  letter-spacing: 0.08em;
+  margin: 0 0 var(--space-2);
+  padding-bottom: var(--space-3);
 }
 
 .mobile-menu ul {
@@ -212,89 +224,120 @@ nav ul li a.active {
 }
 
 .mobile-menu ul li {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  display: block;
-  margin: 0;
-  opacity: 0;
-  transform: translateX(16px);
-}
-
-.mobile-menu.open ul li {
-  animation: drawerItemIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: calc(0.12s + var(--i) * 0.06s);
+  border-bottom: 1px solid var(--color-neutral-solid-gray-200);
 }
 
 .mobile-menu ul li a {
   align-items: center;
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--color-neutral-solid-gray-900);
   display: flex;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-700);
   justify-content: space-between;
-  padding: 16px 4px;
+  letter-spacing: 0.02em;
+  min-height: var(--min-touch-target);
+  padding: var(--space-3) var(--space-2);
   text-decoration: none;
-  transition: color 0.2s ease, padding-left 0.25s ease;
 }
 
-.mobile-menu ul li a .mobile-menu-arrow {
-  color: var(--gold);
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+.mobile-menu ul li a:hover {
+  background-color: var(--color-key-50);
+  text-decoration: underline;
 }
 
-.mobile-menu ul li a:active,
 .mobile-menu ul li a.active {
-  color: var(--gold-light);
-  padding-left: 12px;
+  box-shadow: inset 0.25rem 0 0 0 var(--color-key-900);
+  color: var(--color-key-900);
 }
 
-.mobile-menu ul li a.active .mobile-menu-arrow {
-  opacity: 1;
-  transform: translateX(0);
+.mobile-menu-arrow {
+  color: var(--color-neutral-solid-gray-536);
+  flex-shrink: 0;
 }
 
-/* Drawer social block */
 .mobile-menu-social {
-  margin-top: auto;
-  padding-top: 28px;
+  margin-top: var(--space-8);
 }
 
 .mobile-menu-social-label {
-  color: var(--gold-light);
+  color: var(--color-neutral-solid-gray-536);
   display: block;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  margin-bottom: 12px;
-  text-transform: uppercase;
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-700);
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-2);
 }
 
 .mobile-menu-social-links {
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
 .mobile-menu-social-links a {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.85rem;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.mobile-menu-social-links a:active {
-  color: var(--gold-light);
+  align-items: center;
+  display: flex;
+  font-size: var(--font-size-16);
+  min-height: var(--min-touch-target);
 }
 
 .mobile-overlay {
-  animation: overlayFadeIn 0.3s ease forwards;
-  backdrop-filter: blur(2px);
-  background: rgba(0, 17, 40, 0.55);
-  bottom: 0;
-  left: 0;
+  background-color: var(--color-neutral-opacity-gray-536);
+  inset: 0;
   position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 800;
+  z-index: 1005;
+}
+
+@media (min-width: 48em) {
+  .mobile-overlay {
+    display: none;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   パンくずリスト（DADS「Breadcrumbs」）
+   -------------------------------------------------------------------------- */
+.breadcrumbs {
+  margin-bottom: var(--space-6);
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumbs li {
+  align-items: center;
+  display: flex;
+  font-size: var(--font-size-16);
+  letter-spacing: 0;
+  line-height: var(--line-height-100);
+}
+
+.breadcrumbs li:not(:last-child)::after {
+  color: var(--color-neutral-solid-gray-536);
+  content: '';
+  background-color: currentColor;
+  height: 0.75rem;
+  margin-inline: var(--space-2);
+  mask: var(--breadcrumb-arrow) center / contain no-repeat;
+  -webkit-mask: var(--breadcrumb-arrow) center / contain no-repeat;
+  width: 0.75rem;
+}
+
+.breadcrumbs a {
+  display: inline-block;
+  padding-block: var(--space-2);
+}
+
+.breadcrumbs [aria-current='page'] {
+  color: var(--color-neutral-solid-gray-700);
+  padding-block: var(--space-2);
+}
+
+:root {
+  --breadcrumb-arrow: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 1.3 3.8 2l4 4-4 4 .7.7L9.2 6z'/%3E%3C/svg%3E");
 }

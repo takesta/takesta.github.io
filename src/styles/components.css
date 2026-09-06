@@ -1,425 +1,495 @@
-/* ===== About description ===== */
-.description-block {
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: 12px;
-  box-shadow: var(--shadow-sm);
-  font-size: 1.05rem;
-  line-height: 2;
-  margin: 0 0 3rem;
-  padding: 24px 32px;
+/* =============================================================================
+   Components — DADS 基本デザインのトークン上で組み立てた各パーツ
+   ========================================================================== */
+
+/* -----------------------------------------------------------------------------
+   本文ブロック
+   -------------------------------------------------------------------------- */
+.prose {
+  color: var(--color-neutral-solid-gray-900);
+  margin: 0;
+  max-width: 44rem;
 }
 
-/* ===== Schedule ===== */
-.schedule-item {
-  background-color: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: 10px;
-  box-shadow: var(--shadow-sm);
-  padding: 24px 28px;
-  transition: var(--transition);
+.prose p {
+  margin: 0 0 var(--space-4);
 }
 
-.schedule-item:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+.prose p:last-child {
+  margin-bottom: 0;
 }
 
-.schedule-item h3 {
-  color: var(--navy);
+.prose ul,
+.prose ol {
+  margin: 0 0 var(--space-4);
+  padding-left: 1.5em;
+}
+
+.prose li + li {
+  margin-top: var(--space-2);
+}
+
+/* -----------------------------------------------------------------------------
+   通知バナー（DADS「Notification Banner」）
+   3pxの枠線と角丸12px、種別ごとに色を変える。
+   -------------------------------------------------------------------------- */
+.banner {
+  border: 0.1875rem solid currentColor;
+  border-radius: var(--border-radius-12);
+  display: grid;
+  gap: var(--space-3) var(--space-4);
+  grid-template-columns: 1.5rem 1fr;
+  padding: var(--space-4) var(--space-4) var(--space-6);
+}
+
+@media (min-width: 48em) {
+  .banner {
+    gap: var(--space-4) var(--space-6);
+    grid-template-columns: 2.25rem 1fr;
+    padding: var(--space-6) var(--space-6) var(--space-8);
+  }
+}
+
+.banner--info {
+  color: var(--color-key-900);
+}
+
+.banner--neutral {
+  color: var(--color-neutral-solid-gray-536);
+}
+
+.banner--warning {
+  color: var(--color-semantic-warning-yellow-2);
+}
+
+.banner-icon {
+  grid-column: 1;
+  grid-row: 1;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+@media (min-width: 48em) {
+  .banner-icon {
+    height: 2.25rem;
+    width: 2.25rem;
+  }
+}
+
+.banner-title {
+  color: var(--color-neutral-solid-gray-900);
+  font-size: var(--font-size-17);
+  font-weight: var(--font-weight-700);
+  grid-column: 2;
+  grid-row: 1;
+  letter-spacing: 0.02em;
+  line-height: var(--line-height-170);
+  margin: 0;
+}
+
+@media (min-width: 48em) {
+  .banner-title {
+    font-size: var(--font-size-20);
+    line-height: var(--line-height-150);
+  }
+}
+
+.banner-body {
+  color: var(--color-neutral-solid-gray-900);
+  grid-column: 2;
+}
+
+.banner-body > :first-child {
   margin-top: 0;
 }
 
-/* ===== Schedule table ===== */
-.schedule-table-wrapper {
-  border-radius: 8px;
+.banner-body > :last-child {
+  margin-bottom: 0;
+}
+
+/* -----------------------------------------------------------------------------
+   カード
+   -------------------------------------------------------------------------- */
+.card {
+  background-color: var(--color-neutral-white);
+  border: 1px solid var(--color-neutral-solid-gray-420);
+  border-radius: var(--border-radius-8);
+  padding: var(--space-5);
+}
+
+@media (min-width: 48em) {
+  .card {
+    padding: var(--space-6);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   定義リスト（説明会情報など）
+   -------------------------------------------------------------------------- */
+.definition-list {
+  display: grid;
+  margin: 0;
+}
+
+.definition-list > div {
+  border-top: 1px solid var(--color-neutral-solid-gray-200);
+  display: grid;
+  gap: 0 var(--space-4);
+  padding-block: var(--space-3);
+}
+
+.definition-list > div:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.definition-list > div:last-child {
+  padding-bottom: 0;
+}
+
+@media (min-width: 48em) {
+  .definition-list > div {
+    grid-template-columns: 12rem 1fr;
+  }
+}
+
+.definition-list dt {
+  color: var(--color-neutral-solid-gray-700);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-700);
+  margin: 0;
+}
+
+.definition-list dd {
+  color: var(--color-neutral-solid-gray-900);
+  margin: 0;
+}
+
+/* -----------------------------------------------------------------------------
+   テーブル（年間スケジュール）
+   -------------------------------------------------------------------------- */
+.table-wrapper {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-.schedule-table {
+.data-table {
   border-collapse: collapse;
+  min-width: 22rem;
   width: 100%;
 }
 
-.schedule-table thead {
-  background: var(--navy);
-  color: var(--white);
-}
-
-.schedule-table th {
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  padding: 14px 20px;
+.data-table caption {
+  color: var(--color-neutral-solid-gray-700);
+  margin-bottom: var(--space-3);
   text-align: left;
 }
 
-.schedule-table th:first-child {
-  border-radius: 8px 0 0 0;
-  width: 100px;
-}
-
-.schedule-table th:last-child {
-  border-radius: 0 8px 0 0;
-}
-
-.schedule-table tbody tr {
-  border-bottom: 1px solid var(--gray-200);
-  transition: background 0.2s;
-}
-
-.schedule-table tbody tr:last-child {
-  border-bottom: none;
-}
-
-.schedule-table tbody tr:hover {
-  background-color: var(--off-white);
-}
-
-.schedule-table tbody tr:nth-child(even) {
-  background-color: var(--gray-50);
-}
-
-.schedule-table tbody tr:nth-child(even):hover {
-  background-color: var(--off-white);
-}
-
-.schedule-table td {
-  padding: 14px 20px;
+.data-table th,
+.data-table td {
+  border-bottom: 1px solid var(--color-neutral-solid-gray-420);
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
   vertical-align: top;
 }
 
-.schedule-month {
-  color: var(--navy);
-  font-weight: 700;
-}
-
-.schedule-events {
-  color: var(--gray-600);
-  font-size: 0.95rem;
-}
-
-/* ===== Team page ===== */
-#team {
-  padding: 80px 0;
-}
-
-.year-section {
-  margin-bottom: 4rem;
-}
-
-.year-badge {
-  align-items: center;
-  display: flex;
-  gap: 16px;
-  margin-bottom: 2rem;
-}
-
-.year-badge-label {
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-  border-radius: 8px;
-  color: var(--white);
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
-  font-weight: 700;
-  padding: 8px 20px;
+.data-table thead th {
+  background-color: var(--color-neutral-solid-gray-50);
+  border-bottom: 0.1875rem solid var(--color-key-900);
+  color: var(--color-neutral-solid-gray-900);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-700);
+  letter-spacing: 0.02em;
   white-space: nowrap;
 }
 
-.year-badge-line {
-  background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
-  flex: 1;
-  height: 2px;
+.data-table tbody th {
+  color: var(--color-key-900);
+  font-weight: var(--font-weight-700);
+  white-space: nowrap;
+  width: 6rem;
 }
 
-.gender-section {
-  margin-bottom: 2.5rem;
+.data-table tbody tr:last-child th,
+.data-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
-.gender-label {
-  align-items: center;
-  color: var(--gray-600);
-  display: flex;
-  font-size: 0.9rem;
-  font-weight: 700;
-  gap: 8px;
-  letter-spacing: 0.1em;
-  margin-bottom: 1.2rem;
-  text-transform: uppercase;
+/* -----------------------------------------------------------------------------
+   部員紹介
+   -------------------------------------------------------------------------- */
+.year-group + .year-group {
+  margin-top: var(--space-12);
 }
 
-.gender-label::after {
-  background: var(--gray-200);
-  content: '';
-  flex: 1;
-  height: 1px;
+.gender-group + .gender-group {
+  margin-top: var(--space-8);
+}
+
+.gender-heading {
+  color: var(--color-neutral-solid-gray-700);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-700);
+  letter-spacing: 0.02em;
+  margin: 0 0 var(--space-4);
 }
 
 .members-grid {
   display: grid;
-  gap: 1.2rem;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.team-member-card {
-  background-color: var(--white);
-  border-radius: 14px;
-  box-shadow: var(--shadow-sm);
-  padding: 1.5rem 1rem;
+@media (min-width: 48em) {
+  .members-grid {
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  }
+}
+
+.member-card {
+  align-items: center;
+  background-color: var(--color-neutral-white);
+  border: 1px solid var(--color-neutral-solid-gray-420);
+  border-radius: var(--border-radius-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-3);
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.team-member-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-6px);
 }
 
 .member-photo-wrap {
-  margin: 0 auto 0.75rem;
-  width: 90px;
-  height: 90px;
+  height: 3.5rem;
+  width: 3.5rem;
+}
+
+@media (min-width: 48em) {
+  .member-photo-wrap {
+    height: 5rem;
+    width: 5rem;
+  }
 }
 
 .member-photo {
-  border: 3px solid var(--gold-light);
-  border-radius: 50%;
+  border-radius: var(--border-radius-full);
   height: 100%;
   object-fit: cover;
   width: 100%;
 }
 
 .member-photo-placeholder {
-  background: linear-gradient(135deg, #c5d5e8 0%, #7a9cbf 100%);
-  border-radius: 50%;
+  align-items: center;
+  background-color: var(--color-key-50);
+  border: 1px solid var(--color-neutral-solid-gray-200);
+  border-radius: var(--border-radius-full);
+  color: var(--color-key-700);
+  display: flex;
   height: 100%;
-  position: relative;
+  justify-content: center;
   width: 100%;
 }
 
-.member-photo-placeholder::after {
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 50%;
-  bottom: 0;
-  content: '';
-  height: 55%;
-  left: 50%;
-  position: absolute;
-  transform: translateX(-50%) translateY(30%);
-  width: 70%;
+.member-photo-placeholder svg {
+  height: 60%;
+  width: 60%;
 }
 
-.member-photo-placeholder::before {
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 50%;
-  content: '';
-  height: 35%;
-  left: 50%;
-  position: absolute;
-  top: 18%;
-  transform: translateX(-50%);
-  width: 35%;
+/* バッジの有無で氏名の縦位置がずれないよう、高さを確保したスロットに入れる */
+.member-role-slot {
+  align-items: center;
+  display: flex;
+  min-height: 1.5rem;
 }
 
-.member-title-badge {
-  background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 100%);
-  border-radius: 4px;
-  color: var(--white);
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  margin-bottom: 0.4rem;
-  padding: 3px 10px;
+.member-role {
+  background-color: var(--color-key-900);
+  border-radius: var(--border-radius-4);
+  color: var(--color-neutral-white);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-700);
+  letter-spacing: 0;
+  line-height: var(--line-height-100);
+  padding: var(--space-1) var(--space-2);
 }
 
 .member-name {
-  color: var(--gray-800);
-  font-size: 0.95rem;
-  font-weight: 500;
+  color: var(--color-neutral-solid-gray-900);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-700);
+  letter-spacing: 0;
+  line-height: var(--line-height-130);
   margin: 0;
 }
 
-/* ===== Contact / Social Links ===== */
-.contact-description {
-  color: var(--gray-600);
-  margin: 0 auto 2.5rem;
-  max-width: 36rem;
-  text-align: center;
-}
-
+/* -----------------------------------------------------------------------------
+   SNSリンクカード
+   -------------------------------------------------------------------------- */
 .social-links {
   display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin: 0 auto;
-  max-width: 640px;
+  gap: var(--space-4);
+  grid-template-columns: 1fr;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 48em) {
+  .social-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .social-link-card {
   align-items: center;
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: 16px;
-  box-shadow: var(--shadow-sm);
-  color: var(--navy);
+  background-color: var(--color-neutral-white);
+  border: 1px solid var(--color-neutral-solid-gray-420);
+  border-radius: var(--border-radius-8);
   display: flex;
-  gap: 16px;
-  overflow: hidden;
-  padding: 18px 20px;
-  position: relative;
+  gap: var(--space-4);
+  min-height: var(--min-touch-target);
+  padding: var(--space-4);
   text-decoration: none;
-  transition: var(--transition);
-}
-
-/* Brand accent bar on the left edge */
-.social-link-card::before {
-  background: var(--brand, var(--navy));
-  content: '';
-  inset: 0 auto 0 0;
-  position: absolute;
-  transition: var(--transition);
-  width: 4px;
 }
 
 .social-link-card:hover {
-  border-color: var(--brand, var(--navy));
-  box-shadow: var(--shadow-md);
-  transform: translateY(-4px);
+  background-color: var(--color-key-50);
+  border-color: var(--color-key-900);
 }
 
-.social-link-card--instagram { --brand: #d6249f; }
-.social-link-card--x { --brand: #111111; }
-.social-link-card--facebook { --brand: #1877f2; }
+.social-link-card:active {
+  background-color: var(--color-key-100);
+}
 
 .social-link-icon {
   align-items: center;
-  background: var(--brand, var(--navy));
-  border-radius: 12px;
-  color: var(--white);
+  background-color: var(--color-key-900);
+  border-radius: var(--border-radius-8);
+  color: var(--color-neutral-white);
   display: flex;
   flex-shrink: 0;
-  height: 44px;
+  height: 2.75rem;
   justify-content: center;
-  width: 44px;
+  width: 2.75rem;
 }
 
 .social-link-icon svg {
   fill: currentColor;
-  height: 24px;
-  width: 24px;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .social-link-text {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0.125rem;
   min-width: 0;
 }
 
 .social-link-label {
-  color: var(--navy);
-  font-size: 0.95rem;
-  font-weight: 700;
+  color: var(--color-key-800);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-700);
   letter-spacing: 0.02em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: var(--line-height-130);
+  text-decoration: underline;
+  text-underline-offset: 0.1875rem;
+}
+
+.social-link-card:hover .social-link-label {
+  color: var(--color-key-900);
+  text-decoration-thickness: 0.1875rem;
 }
 
 .social-link-handle {
-  color: var(--gray-600);
-  font-size: 0.85rem;
+  color: var(--color-neutral-solid-gray-536);
+  font-size: var(--font-size-14);
+  letter-spacing: 0;
+  line-height: var(--line-height-130);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .social-link-arrow {
-  color: var(--gray-400);
-  display: flex;
+  color: var(--color-neutral-solid-gray-536);
+  flex-shrink: 0;
   margin-left: auto;
-  transition: var(--transition);
 }
 
-.social-link-arrow svg {
-  height: 20px;
-  width: 20px;
+/* -----------------------------------------------------------------------------
+   入部までの流れ（順序付きステップ）
+   -------------------------------------------------------------------------- */
+.steps {
+  counter-reset: step;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.social-link-card:hover .social-link-arrow {
-  color: var(--brand, var(--navy));
-  transform: translateX(4px);
-}
-
-/* ===== Prospective / Timeline ===== */
-.timeline {
-  margin: 2rem 0;
+.steps > li {
+  border-left: 2px solid var(--color-neutral-solid-gray-420);
+  counter-increment: step;
+  padding: 0 0 var(--space-8) var(--space-6);
   position: relative;
 }
 
-.timeline::before {
-  background: linear-gradient(to bottom, var(--gold), var(--navy));
-  bottom: 0;
-  content: '';
-  left: 20px;
+.steps > li:last-child {
+  border-left-color: transparent;
+  padding-bottom: 0;
+}
+
+.steps > li::before {
+  align-items: center;
+  background-color: var(--color-key-900);
+  border-radius: var(--border-radius-full);
+  color: var(--color-neutral-white);
+  content: counter(step);
+  display: flex;
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-700);
+  height: 1.75rem;
+  justify-content: center;
+  left: -0.875rem;
+  line-height: var(--line-height-100);
   position: absolute;
   top: 0;
-  width: 2px;
+  width: 1.75rem;
 }
 
-.timeline-item {
-  margin-bottom: 2rem;
-  padding-left: 56px;
-  position: relative;
+.step-label {
+  color: var(--color-neutral-solid-gray-900);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-700);
+  letter-spacing: 0.02em;
+  line-height: var(--line-height-160);
+  margin: 0 0 var(--space-1);
 }
 
-.timeline-dot {
-  background: var(--gold);
-  border: 3px solid var(--white);
-  border-radius: 50%;
-  box-shadow: 0 0 0 2px var(--gold);
-  height: 16px;
-  left: 13px;
-  position: absolute;
-  top: 4px;
-  width: 16px;
-}
-
-.timeline-label {
-  color: var(--navy);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  margin: 0 0 4px;
-  text-transform: uppercase;
-}
-
-.timeline-date {
-  color: var(--gray-800);
-  font-size: 1rem;
-  font-weight: 500;
-  margin: 0 0 2px;
-}
-
-.timeline-note {
-  color: var(--gray-600);
-  font-size: 0.9rem;
-  margin: 4px 0 0;
-}
-
-.info-box {
-  background: var(--off-white);
-  border: 1px solid var(--gray-200);
-  border-radius: 12px;
-  margin: 2rem 0;
-  padding: 24px 28px;
-}
-
-.info-box p {
-  margin: 0 0 12px;
-}
-
-.info-box p:last-child {
+.step-date {
+  color: var(--color-neutral-solid-gray-900);
   margin: 0;
+}
+
+.step-note {
+  color: var(--color-neutral-solid-gray-536);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-160);
+  margin: var(--space-1) 0 0;
+}
+
+/* -----------------------------------------------------------------------------
+   グリッド項目をリストとしてマークアップした場合の伸長指定
+   -------------------------------------------------------------------------- */
+.members-grid > li,
+.social-links > li {
+  display: flex;
+}
+
+.members-grid > li > .member-card,
+.social-links > li > .social-link-card {
+  flex: 1;
 }

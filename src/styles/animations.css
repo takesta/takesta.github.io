@@ -1,47 +1,28 @@
-/* ===== Scroll Animation ===== */
+/* =============================================================================
+   Animations
+   DADS「アクセシビリティ」の考え方に沿って動きは控えめにし、
+   prefers-reduced-motion では完全に無効化する。
+
+   既定は「表示」。画面外の要素にだけ JS が data-reveal="pending" を付け、
+   スクロールで解除する。JSが動作しない環境でもコンテンツは読める。
+   ========================================================================== */
+
 .fade-up {
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.fade-up[data-reveal='pending'] {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(0.75rem);
 }
 
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ===== Hero animations ===== */
-@keyframes heroFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(8px); }
-}
-
-/* ===== Mobile drawer animations ===== */
-@keyframes drawerItemIn {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes overlayFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* ===== Reduced Motion ===== */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
@@ -50,22 +31,7 @@
     transition-duration: 0.01ms !important;
   }
 
-  .fade-up {
-    opacity: 1;
-    transform: none;
-  }
-
-  .hero-text {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  .scroll-indicator {
-    animation: none;
-  }
-
-  .mobile-menu ul li {
+  .fade-up[data-reveal='pending'] {
     opacity: 1;
     transform: none;
   }

@@ -1,5 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet-async'
+import Banner from './Banner'
+import PageHeader from './PageHeader'
 import data from '../../content/prospective.json'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
@@ -9,7 +11,10 @@ function Prospective() {
   const helmetMeta = (
     <Helmet>
       <title>入部希望の方へ | 慶應義塾體育會ゴルフ部</title>
-      <meta name="description" content="慶應義塾體育會ゴルフ部への入部案内。説明会情報・入部フローをご確認ください。" />
+      <meta
+        name="description"
+        content="慶應義塾體育會ゴルフ部への入部案内。説明会情報・入部フローをご確認ください。"
+      />
       <link rel="canonical" href="https://keiogolf.com/prospective" />
     </Helmet>
   )
@@ -18,20 +23,12 @@ function Prospective() {
     return (
       <div className="container page-content">
         {helmetMeta}
-        <div className="section-heading fade-up">
-          <h2>{data.pageTitle}</h2>
-          <div className="section-heading-divider"><span /></div>
-        </div>
-
+        <PageHeader title={data.pageTitle} />
         <div className="fade-up">
-          <div className="info-box" style={{ textAlign: 'center', padding: '2.5rem 2rem' }}>
-            <p style={{ fontSize: '1.15rem', fontWeight: '600', color: 'var(--navy)', marginBottom: '1rem' }}>
-              {data.closedMessage}
-            </p>
-            <p style={{ color: 'var(--gray-600)', fontSize: '0.95rem' }}>{data.closedNote}</p>
-          </div>
+          <Banner title={data.closedMessage} type="neutral">
+            <p>{data.closedNote}</p>
+          </Banner>
         </div>
-
       </div>
     )
   }
@@ -41,54 +38,69 @@ function Prospective() {
   return (
     <div className="container page-content">
       {helmetMeta}
-      <div className="section-heading fade-up">
-        <h2>{data.pageTitle}</h2>
-        <div className="section-heading-divider"><span /></div>
-      </div>
+      <PageHeader lead={data.intro} title={data.pageTitle} />
 
-      <div className="fade-up">
-        <div className="description-block">{data.intro}</div>
+      <section className="page-section fade-up">
+        <h2 className="section-title">入部説明会</h2>
 
-        <div className="info-box">
-          <p>
-            <strong>{orientationSession.date}</strong>、{orientationSession.startTime}〜{orientationSession.endTime}に
-            {orientationSession.format}にて入部説明会を開催いたします。
-          </p>
-          <p>
-            参加希望の方はLINE公式アカウント「<strong>{line.accountName}</strong>」（LINE ID：{line.id}）を
-            追加のうえ、<strong>{line.deadline}</strong>までに以下の項目をご送信ください。
-          </p>
-          <ul style={{ margin: '12px 0 0', paddingLeft: '1.4rem' }}>
-            {data.requiredFields.map(field => (
-              <li key={field} style={{ marginBottom: '4px' }}>{field}</li>
-            ))}
-          </ul>
-        </div>
-
-        <p style={{ color: 'var(--gray-600)', fontSize: '0.95rem' }}>{data.mandatoryNote}</p>
-        <p style={{ color: 'var(--gray-600)', fontSize: '0.9rem', fontStyle: 'italic' }}>{data.formNote}</p>
-      </div>
-
-      <div className="fade-up">
-        <h3 style={{ color: 'var(--navy)', fontSize: '1.2rem', margin: '3rem 0 1.5rem', letterSpacing: '0.04em' }}>
-          {data.timelineHeading}
-        </h3>
-        <div className="timeline">
-          {data.timeline.map((step, i) => (
-            <div key={i} className="timeline-item">
-              <div className="timeline-dot" />
-              <p className="timeline-label">{step.label}</p>
-              <p className="timeline-date">{step.date}</p>
-              {step.time && <p className="timeline-date" style={{ color: 'var(--gray-600)', fontSize: '0.95rem' }}>{step.time}</p>}
-              {step.note && <p className="timeline-note">※{step.note}</p>}
+        <div className="card">
+          <dl className="definition-list">
+            <div>
+              <dt>日時</dt>
+              <dd>
+                {orientationSession.date} {orientationSession.startTime}〜
+                {orientationSession.endTime}
+              </dd>
             </div>
-          ))}
+            <div>
+              <dt>開催形式</dt>
+              <dd>{orientationSession.format}</dd>
+            </div>
+            <div>
+              <dt>申込方法</dt>
+              <dd>
+                LINE公式アカウント「{line.accountName}」（LINE ID：{line.id}）を追加のうえ、
+                {line.deadline}までに下記の項目をご送信ください。
+              </dd>
+            </div>
+            <div>
+              <dt>送信いただく項目</dt>
+              <dd>
+                <ul>
+                  {data.requiredFields.map((field) => (
+                    <li key={field}>{field}</li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          </dl>
         </div>
 
-        <div className="info-box" style={{ marginTop: '2rem' }}>
-          <p>{data.closing}</p>
+        <div className="prose" style={{ marginTop: 'var(--space-6)' }}>
+          <p>{data.mandatoryNote}</p>
+          <p className="text-muted">{data.formNote}</p>
         </div>
-      </div>
+      </section>
+
+      <section className="page-section fade-up">
+        <h2 className="section-title">{data.timelineHeading}</h2>
+        <ol className="steps">
+          {data.timeline.map((step, i) => (
+            <li key={i}>
+              <p className="step-label">{step.label}</p>
+              <p className="step-date">{step.date}</p>
+              {step.time && <p className="step-date">{step.time}</p>}
+              {step.note && <p className="step-note">※{step.note}</p>}
+            </li>
+          ))}
+        </ol>
+
+        <div style={{ marginTop: 'var(--space-10)' }}>
+          <Banner headingLevel="h3" title="お問い合わせ" type="info">
+            <p>{data.closing}</p>
+          </Banner>
+        </div>
+      </section>
     </div>
   )
 }
