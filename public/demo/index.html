@@ -1,0 +1,984 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <!-- デモページのため検索エンジンにはインデックスさせない（本サイトとの重複コンテンツ回避） -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <title>【デモ】慶應義塾體育會ゴルフ部 公式サイト リニューアル案</title>
+  <meta name="description" content="慶應義塾體育會ゴルフ部 公式サイトのフルリニューアル・デモページです。1922年創部、日本最初の大学ゴルフ部。理念・年間スケジュール・部員紹介・入部案内をワンページでご覧いただけます。" />
+  <link rel="canonical" href="https://keiogolf.com/demo/" />
+
+  <link rel="icon" href="/assets/icons/logo512.png" type="image/png" sizes="512x512" />
+  <link rel="apple-touch-icon" href="/assets/icons/logo512.png" />
+  <meta name="theme-color" content="#002244" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="【デモ】慶應義塾體育會ゴルフ部 公式サイト リニューアル案" />
+  <meta property="og:description" content="慶應義塾體育會ゴルフ部 公式サイトのフルリニューアル・デモページです。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://keiogolf.com/demo/" />
+  <meta property="og:image" content="https://keiogolf.com/assets/ogp-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- LCP となるヒーロー画像を先読み（既存サイトと同じ最適化済みアセットを再利用） -->
+  <link rel="preload" as="image" type="image/avif"
+    imagesrcset="/assets/hero-image-480.avif 480w, /assets/hero-image-768.avif 768w, /assets/hero-image-1280.avif 1280w, /assets/hero-image-1920.avif 1920w"
+    imagesizes="100vw" />
+
+  <!-- 構造化データ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsTeam",
+    "name": "慶應義塾體育會ゴルフ部",
+    "alternateName": ["慶應義塾体育会ゴルフ部", "Keio University Golf Team"],
+    "sport": "Golf",
+    "foundingDate": "1922",
+    "url": "https://keiogolf.com",
+    "logo": "https://keiogolf.com/assets/icons/logo512.png",
+    "sameAs": [
+      "https://www.instagram.com/keio_golf_1922",
+      "https://www.instagram.com/keiogolf_72",
+      "https://x.com/KeioMensGolf",
+      "https://www.facebook.com/keiogolfteam2013"
+    ],
+    "memberOf": { "@type": "CollegeOrUniversity", "name": "慶應義塾大学" }
+  }
+  </script>
+
+  <style>
+    /* ==========================================================
+       デザイントークン
+       ========================================================== */
+    :root {
+      --navy: #003366;
+      --navy-deep: #001d3a;
+      --navy-ink: #0d2b4e;
+      --gold: #c9a227;
+      --gold-bright: #f1c400;
+      --gold-soft: #f6e9bf;
+      --paper: #faf9f6;
+      --white: #ffffff;
+      --ink: #1f2933;
+      --ink-soft: #52606d;
+      --line: #e4e0d7;
+      --radius: 14px;
+      --shadow-sm: 0 2px 10px rgba(13, 43, 78, 0.06);
+      --shadow-md: 0 10px 30px rgba(13, 43, 78, 0.10);
+      --font-sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic Medium",
+        "Yu Gothic", "Noto Sans JP", Meiryo, system-ui, -apple-system, sans-serif;
+      --font-serif: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP",
+        Georgia, "Times New Roman", serif;
+      --header-h: 68px;
+    }
+
+    /* ==========================================================
+       リセット / ベース
+       ========================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* 固定トップバー = デモ告知（約38px）+ ヘッダー分の余白を確保 */
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 56px); }
+    body {
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.9;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      overflow-wrap: anywhere;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--navy); }
+    ul, ol { list-style: none; }
+
+    :focus-visible {
+      outline: 3px solid var(--gold-bright);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+    /* スキップリンク */
+    .skip-link {
+      position: absolute; top: -100px; left: 16px; z-index: 200;
+      background: var(--navy-deep); color: #fff; padding: 10px 18px;
+      border-radius: 0 0 8px 8px; text-decoration: none; font-weight: 700;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ==========================================================
+       固定トップバー（デモ告知 + ヘッダー）
+       ========================================================== */
+    .top-bar { position: fixed; inset: 0 0 auto 0; z-index: 50; }
+
+    .demo-note {
+      background: var(--gold-bright); color: var(--navy-deep);
+      text-align: center; font-size: 13px; font-weight: 700;
+      padding: 7px 16px; line-height: 1.6;
+    }
+    .demo-note a { color: var(--navy-deep); text-underline-offset: 3px; }
+
+    .site-header {
+      height: var(--header-h);
+      display: flex; align-items: center;
+      color: #fff;
+      background: transparent;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .site-header.scrolled {
+      background: rgba(0, 29, 58, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+    }
+    .site-header .container {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+    }
+    .brand {
+      display: flex; flex-direction: column; text-decoration: none; color: #fff;
+      line-height: 1.3;
+    }
+    .brand-name { font-family: var(--font-serif); font-size: 17px; font-weight: 700; letter-spacing: 0.06em; }
+    .brand-en { font-size: 10px; letter-spacing: 0.32em; color: var(--gold-bright); text-transform: uppercase; }
+
+    .nav-desktop ul { display: flex; gap: 4px; }
+    .nav-desktop a {
+      display: block; padding: 8px 14px; color: #fff; text-decoration: none;
+      font-size: 14px; font-weight: 600; letter-spacing: 0.04em; border-radius: 8px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .nav-desktop a:hover { background: rgba(255, 255, 255, 0.14); color: var(--gold-bright); }
+
+    .menu-toggle {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      width: 46px; height: 46px; padding: 12px;
+      background: transparent; border: 0; cursor: pointer; border-radius: 10px;
+    }
+    .menu-toggle span {
+      display: block; height: 2px; width: 100%; background: #fff;
+      border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-mobile {
+      display: none;
+      position: fixed; inset: 0; z-index: 40;
+      background: linear-gradient(160deg, var(--navy-deep), var(--navy));
+      padding: calc(var(--header-h) + 64px) 32px 32px;
+    }
+    .nav-mobile.open { display: block; }
+    .nav-mobile a {
+      display: flex; justify-content: space-between; align-items: center;
+      color: #fff; text-decoration: none; font-size: 19px; font-weight: 700;
+      padding: 16px 4px; border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .nav-mobile a::after { content: "→"; color: var(--gold-bright); }
+    .nav-mobile-sns { margin-top: 28px; font-size: 13px; color: rgba(255,255,255,0.75); }
+    .nav-mobile-sns a { display: inline; border: 0; padding: 0; font-size: 14px; color: var(--gold-bright); }
+    .nav-mobile-sns a::after { content: none; }
+
+    body.menu-open { overflow: hidden; }
+
+    /* ==========================================================
+       ヒーロー
+       ========================================================== */
+    .hero {
+      position: relative; min-height: 100svh; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; color: #fff; overflow: hidden;
+      padding: calc(var(--header-h) + 80px) 24px 96px;
+    }
+    .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg,
+        rgba(0, 22, 45, 0.55) 0%,
+        rgba(0, 22, 45, 0.35) 45%,
+        rgba(0, 22, 45, 0.72) 100%);
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 860px; }
+    .hero-eyebrow {
+      font-size: 13px; letter-spacing: 0.5em; text-transform: uppercase;
+      color: var(--gold-bright); font-weight: 700; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 6.4vw, 64px);
+      font-weight: 700; letter-spacing: 0.08em; line-height: 1.35;
+      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+    }
+    .hero-line {
+      width: 72px; height: 2px; margin: 28px auto;
+      background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+    }
+    .hero-sub { font-size: clamp(13px, 2vw, 16px); letter-spacing: 0.42em; text-transform: uppercase; }
+    .hero-lead {
+      margin-top: 24px; font-size: clamp(14px, 1.8vw, 16px); line-height: 2.1;
+      color: rgba(255, 255, 255, 0.92); max-width: 640px; margin-inline: auto;
+    }
+    .hero-cta { margin-top: 40px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 14px 36px; border-radius: 999px;
+      font-weight: 700; font-size: 15px; letter-spacing: 0.08em; text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-gold { background: var(--gold-bright); color: var(--navy-deep); box-shadow: 0 6px 20px rgba(241, 196, 0, 0.35); }
+    .btn-ghost { border: 1.5px solid rgba(255, 255, 255, 0.75); color: #fff; }
+    .btn-ghost:hover { background: rgba(255, 255, 255, 0.12); }
+
+    .scroll-cue {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      z-index: 1; color: rgba(255, 255, 255, 0.85); font-size: 11px;
+      letter-spacing: 0.3em; text-transform: uppercase; text-align: center;
+    }
+    .scroll-cue::after {
+      content: ""; display: block; width: 1px; height: 36px; margin: 8px auto 0;
+      background: linear-gradient(180deg, var(--gold-bright), transparent);
+      animation: cue 2s ease-in-out infinite;
+    }
+    @keyframes cue { 0%, 100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
+
+    /* ==========================================================
+       スタッツ
+       ========================================================== */
+    .stats {
+      background: var(--navy-deep); color: #fff;
+      padding: 44px 0;
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center;
+    }
+    .stat-value {
+      font-family: var(--font-serif); font-size: clamp(30px, 4vw, 42px);
+      font-weight: 700; color: var(--gold-bright); line-height: 1.2;
+    }
+    .stat-value small { font-size: 0.45em; font-weight: 600; margin-left: 2px; }
+    .stat-label { font-size: 13px; letter-spacing: 0.12em; color: rgba(255, 255, 255, 0.8); margin-top: 6px; }
+
+    /* ==========================================================
+       セクション共通
+       ========================================================== */
+    .section { padding: clamp(72px, 10vw, 120px) 0; }
+    .section-alt { background: var(--white); }
+    .section-head { text-align: center; margin-bottom: clamp(40px, 6vw, 64px); }
+    .section-eyebrow {
+      font-size: 12px; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--gold); font-weight: 700; display: block; margin-bottom: 12px;
+    }
+    .section-head h2 {
+      font-family: var(--font-serif); font-size: clamp(26px, 4vw, 38px);
+      color: var(--navy-ink); letter-spacing: 0.1em; line-height: 1.4;
+    }
+    .section-head .rule {
+      width: 56px; height: 2px; background: var(--gold); margin: 22px auto 0;
+    }
+
+    /* ==========================================================
+       理念
+       ========================================================== */
+    .philosophy-grid {
+      display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 5vw, 64px);
+      align-items: center;
+    }
+    .pull-quote {
+      font-family: var(--font-serif); font-size: clamp(22px, 3vw, 30px);
+      color: var(--navy-ink); line-height: 1.8; letter-spacing: 0.06em;
+      border-left: 3px solid var(--gold); padding-left: 24px;
+    }
+    .pull-quote small { display: block; margin-top: 16px; font-size: 13px; color: var(--ink-soft); letter-spacing: 0.1em; }
+    .philosophy-text p { color: var(--ink-soft); margin-bottom: 1em; }
+    .philosophy-text p:last-child { margin-bottom: 0; }
+
+    /* ==========================================================
+       年間スケジュール
+       ========================================================== */
+    .schedule-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    }
+    .month-card {
+      background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 20px; box-shadow: var(--shadow-sm);
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .month-card.has-events { border-top: 3px solid var(--gold); }
+    .month-name {
+      font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--navy-ink);
+    }
+    .month-card ul { display: flex; flex-direction: column; gap: 6px; }
+    .month-card li {
+      font-size: 13.5px; line-height: 1.6; color: var(--ink);
+      padding-left: 16px; position: relative;
+    }
+    .month-card li::before {
+      content: ""; position: absolute; left: 0; top: 0.65em;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+    }
+    .month-empty { font-size: 13px; color: #9aa5b1; }
+
+    /* ==========================================================
+       部員紹介
+       ========================================================== */
+    .leaders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
+    .leader-card {
+      background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm);
+      border: 1px solid var(--line); overflow: hidden;
+    }
+    .leader-card-head {
+      background: linear-gradient(135deg, var(--navy), var(--navy-deep));
+      color: #fff; padding: 16px 24px; display: flex; align-items: baseline; gap: 12px;
+    }
+    .leader-card-head h3 { font-family: var(--font-serif); font-size: 20px; letter-spacing: 0.12em; }
+    .leader-card-head span { font-size: 11px; letter-spacing: 0.24em; color: var(--gold-bright); text-transform: uppercase; }
+    .leader-card dl {
+      display: grid; grid-template-columns: repeat(3, 1fr); padding: 24px; gap: 12px; text-align: center;
+    }
+    .leader-card dt {
+      font-size: 12px; color: var(--gold); font-weight: 700; letter-spacing: 0.2em; margin-bottom: 6px;
+    }
+    .leader-card dd { font-size: 16px; font-weight: 700; color: var(--navy-ink); }
+
+    .roster { display: flex; flex-direction: column; gap: 14px; }
+    .roster details {
+      background: var(--white); border: 1px solid var(--line);
+      border-radius: var(--radius); box-shadow: var(--shadow-sm); overflow: hidden;
+    }
+    .roster summary {
+      cursor: pointer; padding: 18px 24px; font-weight: 700; color: var(--navy-ink);
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      list-style: none; font-size: 16px;
+    }
+    .roster summary::-webkit-details-marker { display: none; }
+    .roster summary .count { font-size: 13px; font-weight: 600; color: var(--ink-soft); }
+    .roster summary::after {
+      content: "＋"; color: var(--gold); font-size: 18px; font-weight: 400; flex: none;
+    }
+    .roster details[open] summary::after { content: "－"; }
+    .roster-body { padding: 0 24px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .roster-group h4 {
+      font-size: 13px; letter-spacing: 0.2em; color: var(--gold);
+      border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 12px;
+    }
+    .roster-group ul { display: flex; flex-wrap: wrap; gap: 8px 10px; }
+    .roster-group li {
+      font-size: 14px; background: var(--paper); border: 1px solid var(--line);
+      border-radius: 999px; padding: 4px 14px; line-height: 1.6;
+    }
+
+    /* ==========================================================
+       入部案内
+       ========================================================== */
+    .recruit-notice {
+      max-width: 720px; margin: 0 auto 48px; text-align: center;
+      background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+      box-shadow: var(--shadow-md); padding: clamp(28px, 5vw, 48px);
+    }
+    .recruit-badge {
+      display: inline-block; background: var(--navy-ink); color: #fff;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.2em;
+      padding: 6px 18px; border-radius: 999px; margin-bottom: 20px;
+    }
+    .recruit-notice h3 {
+      font-family: var(--font-serif); font-size: clamp(19px, 2.6vw, 24px);
+      color: var(--navy-ink); margin-bottom: 14px; line-height: 1.6;
+    }
+    .recruit-notice p { color: var(--ink-soft); font-size: 15px; }
+    .recruit-notice .btn { margin-top: 24px; }
+    .btn-navy { background: var(--navy); color: #fff; box-shadow: 0 6px 20px rgba(0, 51, 102, 0.3); }
+
+    .timeline { max-width: 640px; margin: 0 auto; position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px;
+      width: 2px; background: var(--line);
+    }
+    .timeline-item { position: relative; padding: 0 0 28px 20px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before {
+      content: ""; position: absolute; left: -28px; top: 8px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--gold-bright); border: 3px solid var(--white);
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .timeline-item h4 { font-size: 16px; color: var(--navy-ink); line-height: 1.6; }
+    .timeline-item p { font-size: 14px; color: var(--ink-soft); }
+    .timeline-caption {
+      text-align: center; font-size: 13px; color: var(--ink-soft); margin-bottom: 32px;
+    }
+
+    /* ==========================================================
+       お問い合わせ
+       ========================================================== */
+    .contact { background: linear-gradient(160deg, var(--navy-deep), var(--navy)); color: #fff; }
+    .contact .section-head h2 { color: #fff; }
+    .contact-lead { text-align: center; max-width: 560px; margin: -24px auto 48px; color: rgba(255,255,255,0.85); font-size: 15px; }
+    .sns-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .sns-card {
+      display: flex; flex-direction: column; gap: 6px;
+      background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: var(--radius); padding: 22px; text-decoration: none; color: #fff;
+      transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    }
+    .sns-card:hover { background: rgba(255, 255, 255, 0.14); transform: translateY(-3px); border-color: var(--gold-bright); }
+    .sns-label { font-weight: 700; font-size: 15px; }
+    .sns-handle { font-size: 13px; color: var(--gold-bright); }
+    .sns-arrow { margin-top: auto; padding-top: 10px; font-size: 12px; letter-spacing: 0.2em; color: rgba(255,255,255,0.7); text-transform: uppercase; }
+
+    /* ==========================================================
+       フッター
+       ========================================================== */
+    .site-footer { background: #001428; color: rgba(255, 255, 255, 0.8); padding: 56px 0 32px; font-size: 14px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand h3 { font-family: var(--font-serif); color: #fff; font-size: 18px; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .footer-brand .en { font-size: 10px; letter-spacing: 0.3em; color: var(--gold-bright); text-transform: uppercase; }
+    .footer-brand p { margin-top: 16px; line-height: 1.9; font-size: 13px; }
+    .site-footer h4 { color: #fff; font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 16px; }
+    .site-footer li { margin-bottom: 8px; }
+    .site-footer a { color: rgba(255, 255, 255, 0.8); text-decoration: none; }
+    .site-footer a:hover { color: var(--gold-bright); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.12); padding-top: 24px;
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 12.5px;
+    }
+    .footer-bottom .demo-tag { color: var(--gold-bright); }
+
+    /* ==========================================================
+       スクロールリビール（JS 有効時のみ初期非表示にする）
+       ========================================================== */
+    html.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    html.js .reveal.in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      html.js .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ==========================================================
+       レスポンシブ
+       ========================================================== */
+    @media (max-width: 960px) {
+      .nav-desktop { display: none; }
+      .menu-toggle { display: flex; }
+      .site-header.menu-open-header { background: transparent; box-shadow: none; }
+      .schedule-grid { grid-template-columns: repeat(3, 1fr); }
+      .philosophy-grid { grid-template-columns: 1fr; }
+      .leaders-grid { grid-template-columns: 1fr; }
+      .sns-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
+      .schedule-grid { grid-template-columns: 1fr 1fr; }
+      .roster-body { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 420px) {
+      .schedule-grid { grid-template-columns: 1fr; }
+      .sns-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <script>document.documentElement.classList.add('js')</script>
+  <a class="skip-link" href="#main">本文へスキップ</a>
+
+  <div class="top-bar">
+    <p class="demo-note" role="note">
+      このページはサイトリニューアルの<strong>デモ（提案版）</strong>です。
+      <a href="/">現在の公式サイトはこちら</a>
+    </p>
+
+    <header class="site-header" id="site-header">
+      <div class="container">
+      <a class="brand" href="#top">
+        <span class="brand-name">慶應義塾體育會ゴルフ部</span>
+        <span class="brand-en">Keio University Golf Team</span>
+      </a>
+
+      <nav class="nav-desktop" aria-label="メインナビゲーション">
+        <ul>
+          <li><a href="#philosophy">理念</a></li>
+          <li><a href="#schedule">年間スケジュール</a></li>
+          <li><a href="#members">部員紹介</a></li>
+          <li><a href="#recruit">入部案内</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-mobile" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </header>
+  </div>
+
+  <nav class="nav-mobile" id="nav-mobile" aria-label="モバイルナビゲーション" hidden>
+    <ul>
+      <li><a href="#philosophy">理念</a></li>
+      <li><a href="#schedule">年間スケジュール</a></li>
+      <li><a href="#members">部員紹介</a></li>
+      <li><a href="#recruit">入部案内</a></li>
+      <li><a href="#contact">お問い合わせ</a></li>
+    </ul>
+    <p class="nav-mobile-sns">
+      Follow us：
+      <a href="https://www.instagram.com/keio_golf_1922" target="_blank" rel="noopener noreferrer">Instagram（男子部）</a> /
+      <a href="https://www.instagram.com/keiogolf_72" target="_blank" rel="noopener noreferrer">Instagram（女子部）</a> /
+      <a href="https://x.com/KeioMensGolf" target="_blank" rel="noopener noreferrer">X</a>
+    </p>
+  </nav>
+
+  <main id="main">
+    <!-- ヒーロー -->
+    <section class="hero" id="top" aria-label="メインビジュアル">
+      <picture>
+        <source type="image/avif"
+          srcset="/assets/hero-image-480.avif 480w, /assets/hero-image-768.avif 768w, /assets/hero-image-1280.avif 1280w, /assets/hero-image-1920.avif 1920w"
+          sizes="100vw" />
+        <source type="image/webp"
+          srcset="/assets/hero-image-480.webp 480w, /assets/hero-image-768.webp 768w, /assets/hero-image-1280.webp 1280w, /assets/hero-image-1920.webp 1920w"
+          sizes="100vw" />
+        <img src="/assets/hero-image-1920.jpg" alt="" class="hero-bg"
+          width="1920" height="1280" fetchpriority="high" decoding="async" />
+      </picture>
+
+      <div class="hero-inner">
+        <p class="hero-eyebrow">Since 1922 — 日本最初の大学ゴルフ部</p>
+        <h1>慶應義塾體育會ゴルフ部</h1>
+        <div class="hero-line" aria-hidden="true"></div>
+        <p class="hero-sub">Keio University Golf Team</p>
+        <p class="hero-lead">
+          学生ゴルフ界に旋風を巻き起こす。<br />
+          創部100年を超える伝統を受け継ぎ、関東大学対抗戦Aブロック復帰を目指して、チーム一丸で挑み続けます。
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-gold" href="#recruit">入部をお考えの方へ</a>
+          <a class="btn btn-ghost" href="#philosophy">私たちについて</a>
+        </div>
+      </div>
+
+      <p class="scroll-cue" aria-hidden="true">Scroll</p>
+    </section>
+
+    <!-- スタッツ -->
+    <section class="stats" aria-label="ゴルフ部の概要データ">
+      <div class="container">
+        <div class="stats-grid">
+          <div>
+            <p class="stat-value">1922<small>年</small></p>
+            <p class="stat-label">創部・日本最初の大学ゴルフ部</p>
+          </div>
+          <div>
+            <p class="stat-value">100<small>年超</small></p>
+            <p class="stat-label">受け継がれる歴史と伝統</p>
+          </div>
+          <div>
+            <p class="stat-value">80<small>名</small></p>
+            <p class="stat-label">部員数（男子45名・女子35名）</p>
+          </div>
+          <div>
+            <p class="stat-value">A<small>ブロック</small></p>
+            <p class="stat-label">関東大学対抗戦・復帰目標</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 理念 -->
+    <section class="section" id="philosophy">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">Philosophy</span>
+          <h2>理念</h2>
+          <div class="rule" aria-hidden="true"></div>
+        </div>
+
+        <div class="philosophy-grid">
+          <blockquote class="pull-quote reveal">
+            「学生ゴルフ界に<br />旋風を巻き起こす」
+            <small>— 先輩方より受け継ぐ、慶應ゴルフ部の理念</small>
+          </blockquote>
+          <div class="philosophy-text reveal">
+            <p>
+              我がゴルフ部が目指すのは、関東大学対抗戦Aブロックへの復活です。近年は他大学のレベルも上がってきており、推薦選手を採用していない我が部が勝つためにはどうすれば良いかを考え、チーム一丸となって努力しています。
+            </p>
+            <p>
+              また、国内大学最初のゴルフ部として、実力のみならず、ゴルフ場でのルールやマナーを重んじ、他大学の模範となるよう心掛けています。先輩方が掲げた「学生ゴルフ界に旋風を巻き起こす」という理念のもと、目標を達成すべく、日々精進してまいります。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 年間スケジュール -->
+    <section class="section section-alt" id="schedule">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">Schedule</span>
+          <h2>年間スケジュール</h2>
+          <div class="rule" aria-hidden="true"></div>
+        </div>
+
+        <div class="schedule-grid reveal">
+          <div class="month-card">
+            <h3 class="month-name">4月</h3>
+            <p class="month-empty">主要行事なし</p>
+          </div>
+          <div class="month-card has-events">
+            <h3 class="month-name">5月</h3>
+            <ul><li>関東大学春季リーグ戦</li></ul>
+          </div>
+          <div class="month-card has-events">
+            <h3 class="month-name">6月</h3>
+            <ul>
+              <li>関東学生ゴルフ選手権予選</li>
+              <li>早慶戦</li>
+              <li>八大学対抗戦</li>
+            </ul>
+          </div>
+          <div class="month-card">
+            <h3 class="month-name">7月</h3>
+            <p class="month-empty">主要行事なし</p>
+          </div>
+          <div class="month-card has-events">
+            <h3 class="month-name">8月</h3>
+            <ul>
+              <li>関東学生ゴルフ選手権</li>
+              <li>夏季全員合宿</li>
+              <li>関東大学秋季リーグ戦</li>
+            </ul>
+          </div>
+          <div class="month-card has-events">
+            <h3 class="month-name">9月</h3>
+            <ul><li>常陸宮杯予選</li></ul>
+          </div>
+          <div class="month-card has-events">
+            <h3 class="month-name">10月</h3>
+            <ul><li>文部科学大臣杯予選</li></ul>
+          </div>
+          <div class="month-card has-events">
+            <h3 class="month-name">11月</h3>
+            <ul>
+              <li>三田祭合宿</li>
+              <li>会長杯争奪関東学生ゴルフ選手権</li>
+            </ul>
+          </div>
+          <div class="month-card">
+            <h3 class="month-name">12月</h3>
+            <p class="month-empty">主要行事なし</p>
+          </div>
+          <div class="month-card">
+            <h3 class="month-name">1月</h3>
+            <p class="month-empty">主要行事なし</p>
+          </div>
+          <div class="month-card has-events">
+            <h3 class="month-name">2月</h3>
+            <ul><li>冬季タイ合宿</li></ul>
+          </div>
+          <div class="month-card has-events">
+            <h3 class="month-name">3月</h3>
+            <ul><li>春季全員合宿</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 部員紹介 -->
+    <section class="section" id="members">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">Members</span>
+          <h2>部員紹介</h2>
+          <div class="rule" aria-hidden="true"></div>
+        </div>
+
+        <div class="leaders-grid">
+          <div class="leader-card reveal">
+            <div class="leader-card-head">
+              <h3>男子部</h3>
+              <span>Men's Team</span>
+            </div>
+            <dl>
+              <div><dt>主将</dt><dd>伊藤 優希</dd></div>
+              <div><dt>副将</dt><dd>横井 太郎</dd></div>
+              <div><dt>主務</dt><dd>相山 武仁</dd></div>
+            </dl>
+          </div>
+          <div class="leader-card reveal">
+            <div class="leader-card-head">
+              <h3>女子部</h3>
+              <span>Women's Team</span>
+            </div>
+            <dl>
+              <div><dt>主将</dt><dd>林 真衣</dd></div>
+              <div><dt>副将</dt><dd>藤川 真悠</dd></div>
+              <div><dt>主務</dt><dd>塩田 瞳子</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="roster reveal">
+          <details>
+            <summary>4年生 <span class="count">男子10名・女子8名</span></summary>
+            <div class="roster-body">
+              <div class="roster-group">
+                <h4>男子</h4>
+                <ul>
+                  <li>相山 武仁</li><li>大川 廣継</li><li>伊藤 優希</li><li>飼沼 慎一朗</li><li>境 亮輔</li><li>芹沢 眞仁</li><li>千倉 大地</li><li>平沼 光太郎</li><li>三上 慶</li><li>横井 太郎</li>
+                </ul>
+              </div>
+              <div class="roster-group">
+                <h4>女子</h4>
+                <ul>
+                  <li>岩村 莉沙</li><li>塩田 瞳子</li><li>富田 己子</li><li>中井 美奈子</li><li>濱谷 美欧</li><li>林 真衣</li><li>藤川 真悠</li><li>三原 瑞貴</li>
+                </ul>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>3年生 <span class="count">男子12名・女子8名</span></summary>
+            <div class="roster-body">
+              <div class="roster-group">
+                <h4>男子</h4>
+                <ul>
+                  <li>阿部 英彦</li><li>生松 将吾</li><li>上本 航輝</li><li>片岡 謙</li><li>鈴木 拓磨</li><li>田中 康晴</li><li>中野 天真</li><li>二飯田 貴大</li><li>野仲 勇羽</li><li>増田 壮一郎</li><li>山下 諒</li><li>横井 脩人</li>
+                </ul>
+              </div>
+              <div class="roster-group">
+                <h4>女子</h4>
+                <ul>
+                  <li>石井 里佳</li><li>木下 真衣</li><li>田島 七美</li><li>土志田 理佐</li><li>柳原 結夏</li><li>山本 緋奈</li><li>弓長 里紗恵</li><li>陸 世妃</li>
+                </ul>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>2年生 <span class="count">男子12名・女子8名</span></summary>
+            <div class="roster-body">
+              <div class="roster-group">
+                <h4>男子</h4>
+                <ul>
+                  <li>奥山 大地</li><li>小泉 健人</li><li>小林 永征</li><li>崔 新知</li><li>西丸 雄之助</li><li>菅原 勇次郎</li><li>立石 大貴</li><li>田中 風雅</li><li>沼尻 寧央</li><li>長谷川 拓</li><li>宮崎 颯</li><li>吉田 圭吾</li>
+                </ul>
+              </div>
+              <div class="roster-group">
+                <h4>女子</h4>
+                <ul>
+                  <li>佐々木 菜帆</li><li>重田 真結子</li><li>舘山 杏奈</li><li>中田 織乃</li><li>林 杏奈</li><li>古澤 日菜子</li><li>三橋 亜海</li><li>森川 椰子</li>
+                </ul>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>1年生 <span class="count">男子11名・女子11名</span></summary>
+            <div class="roster-body">
+              <div class="roster-group">
+                <h4>男子</h4>
+                <ul>
+                  <li>青木 尊</li><li>秋江 蓮斗</li><li>内川 夢都</li><li>駒井 翔一</li><li>島田 皓</li><li>杉山 旦</li><li>関口 龍太郎</li><li>田中 良汰</li><li>中島 大輔</li><li>南 怜壱</li><li>森島 海友</li>
+                </ul>
+              </div>
+              <div class="roster-group">
+                <h4>女子</h4>
+                <ul>
+                  <li>川上 真央</li><li>清永 采邑</li><li>黒木 まゆら</li><li>小林 葉奈</li><li>小林 百合香</li><li>佐藤 さくら</li><li>佐野 美咲</li><li>寺岡 杏梨</li><li>根村 莉子</li><li>松澤 柚希</li><li>山内 優充佳</li>
+                </ul>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 入部案内 -->
+    <section class="section section-alt" id="recruit">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">Join Us</span>
+          <h2>入部希望の方へ</h2>
+          <div class="rule" aria-hidden="true"></div>
+        </div>
+
+        <div class="recruit-notice reveal">
+          <span class="recruit-badge">2026年度</span>
+          <h3>2026年度の新入部員募集は締め切りました。</h3>
+          <p>
+            次年度以降の募集については、Instagram・X等のSNSにてお知らせいたします。ご関心をお持ちの方はぜひフォローください。
+          </p>
+          <a class="btn btn-navy" href="#contact">SNSをフォローする</a>
+        </div>
+
+        <p class="timeline-caption reveal">ご参考：2026年度の入部までの流れ</p>
+        <ol class="timeline reveal">
+          <li class="timeline-item">
+            <h4>LINE公式アカウントへの情報送信</h4>
+            <p>期限：2026年4月3日（金）</p>
+          </li>
+          <li class="timeline-item">
+            <h4>入部説明会（オンライン）</h4>
+            <p>2026年4月4日（土）18:00〜19:00</p>
+          </li>
+          <li class="timeline-item">
+            <h4>新入生トレーニング</h4>
+            <p>2026年4月6日（月）〜4月22日（水）6:00〜9:00 ／ 期間中に面談を実施</p>
+          </li>
+          <li class="timeline-item">
+            <h4>入部</h4>
+            <p>2026年4月25日（土）</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- お問い合わせ -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">Contact</span>
+          <h2>お問い合わせ</h2>
+          <div class="rule" aria-hidden="true"></div>
+        </div>
+        <p class="contact-lead reveal">
+          ご質問やご入部に関するお問い合わせは、InstagramのDMまでご連絡ください。
+        </p>
+
+        <div class="sns-grid reveal">
+          <a class="sns-card" href="https://www.instagram.com/keio_golf_1922" target="_blank" rel="noopener noreferrer">
+            <span class="sns-label">Instagram（男子部）</span>
+            <span class="sns-handle">@keio_golf_1922</span>
+            <span class="sns-arrow">Follow →</span>
+          </a>
+          <a class="sns-card" href="https://www.instagram.com/keiogolf_72" target="_blank" rel="noopener noreferrer">
+            <span class="sns-label">Instagram（女子部）</span>
+            <span class="sns-handle">@keiogolf_72</span>
+            <span class="sns-arrow">Follow →</span>
+          </a>
+          <a class="sns-card" href="https://x.com/KeioMensGolf" target="_blank" rel="noopener noreferrer">
+            <span class="sns-label">X</span>
+            <span class="sns-handle">@KeioMensGolf</span>
+            <span class="sns-arrow">Follow →</span>
+          </a>
+          <a class="sns-card" href="https://www.facebook.com/keiogolfteam2013" target="_blank" rel="noopener noreferrer">
+            <span class="sns-label">Facebook</span>
+            <span class="sns-handle">keiogolfteam2013</span>
+            <span class="sns-arrow">Follow →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>慶應義塾體育會ゴルフ部</h3>
+          <span class="en">Keio University Golf Team</span>
+          <p>
+            1922年創部。日本最初の大学ゴルフ部として、技術の向上とゴルフ精神の涵養に励んでいます。
+          </p>
+        </div>
+        <nav aria-label="フッターナビゲーション">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#philosophy">理念</a></li>
+            <li><a href="#schedule">年間スケジュール</a></li>
+            <li><a href="#members">部員紹介</a></li>
+            <li><a href="#recruit">入部案内</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h4>Follow Us</h4>
+          <ul>
+            <li><a href="https://www.instagram.com/keio_golf_1922" target="_blank" rel="noopener noreferrer">Instagram（男子部）</a></li>
+            <li><a href="https://www.instagram.com/keiogolf_72" target="_blank" rel="noopener noreferrer">Instagram（女子部）</a></li>
+            <li><a href="https://x.com/KeioMensGolf" target="_blank" rel="noopener noreferrer">X</a></li>
+            <li><a href="https://www.facebook.com/keiogolfteam2013" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 慶應義塾體育會ゴルフ部</p>
+        <p class="demo-tag">DEMO — リニューアル提案ページ ／ <a href="/">現行の公式サイトへ</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // ヘッダー：スクロールで背景を付与
+      var header = document.getElementById('site-header');
+      var ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          header.classList.toggle('scrolled', window.scrollY > 40);
+          ticking = false;
+        });
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // モバイルメニュー
+      var toggle = document.getElementById('menu-toggle');
+      var menu = document.getElementById('nav-mobile');
+      function setMenu(open) {
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+        menu.hidden = !open;
+        menu.classList.toggle('open', open);
+        document.body.classList.toggle('menu-open', open);
+        header.classList.add('scrolled');
+        if (!open) onScroll();
+      }
+      toggle.addEventListener('click', function () {
+        setMenu(toggle.getAttribute('aria-expanded') !== 'true');
+      });
+      menu.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setMenu(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+          setMenu(false);
+          toggle.focus();
+        }
+      });
+
+      // スクロールリビール（reduced motion 時は CSS 側で無効化）
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var targets = document.querySelectorAll('.reveal');
+      if (reduced || !('IntersectionObserver' in window)) {
+        targets.forEach(function (el) { el.classList.add('in'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        targets.forEach(function (el) { io.observe(el); });
+      }
+    })();
+  </script>
+</body>
+</html>
